@@ -2,7 +2,8 @@ package classes;
 
 public class Toyota extends Car {
 
-    public Toyota() {
+    public Toyota(String vin) {
+        super(vin);
         electric = false;
     }
 

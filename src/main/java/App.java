@@ -9,6 +9,52 @@ public class App {
     public static void main(String[] args) throws InterruptedException, IOException {
 
 
+        
+
+    }
+
+    static void findInMapExample() {
+
+        Map<String, Car> cars = new HashMap<String, Car>();
+
+        // O(n) - List
+        // related to the size of the list
+        // bigger list - longer wait
+        // 2x bigger list - 2x longer wait
+
+        // O(1)
+        // not related to size of map
+        // bigger map - same wait
+        // 2x bigger map - same wait
+
+        String needToFind = "123";
+
+        // We already did the work - and mapped
+        // the VIN to the object
+        // key value -> memory directly
+        cars.put("123", new Tesla("123"));
+        cars.put("456", new Toyota("456"));
+
+        Car ourCar = cars.get(needToFind);
+
+        System.out.println(ourCar.getVin());
+
+    }
+
+    static void linkedListExample() {
+        List<Car> cars = new LinkedList<Car>();
+        cars.add(new Tesla("123"));
+        cars.add(new Toyota("456"));
+        // if you're planning on adding cars frequently
+        // your name Jay Leno
+        // you would want a linkedList
+        // why ??
+
+
+
+        for (int i = 0; i < cars.size(); i++){
+            System.out.println(cars.get(i).isElectric());
+        }
     }
 
     static void mapExample() {
@@ -16,8 +62,8 @@ public class App {
         // key -> points to -> hashcode -> memory (not relevant how many keys)
         Map<String, Car> carsByNickname = new HashMap<String, Car>();
 
-        carsByNickname.put("tez", new Tesla());
-        carsByNickname.put("goat", new Toyota());
+        carsByNickname.put("tez", new Tesla("342"));
+        carsByNickname.put("goat", new Toyota("345"));
 
         Set<String> nicknames = carsByNickname.keySet();
         for (int i = 0; i < nicknames.toArray().length; i++) {
@@ -29,12 +75,13 @@ public class App {
 
 
     static void collectionsExamples() {
-        // Queue of cars at carwash
+
+        // Stack of cars at carwash
         Stack<Car> carsInGarage = new Stack<Car>();
-        carsInGarage.add(new Toyota());
-        carsInGarage.add(new Toyota());
-        carsInGarage.add(new Toyota());
-        carsInGarage.add(new Tesla());
+        carsInGarage.add(new Toyota("4352"));
+        carsInGarage.add(new Toyota("476876856"));
+        carsInGarage.add(new Toyota("324"));
+        carsInGarage.add(new Tesla("1111"));
 
         Car easyToTakeFromGarage = carsInGarage.pop();
 
@@ -45,10 +92,10 @@ public class App {
 
         // Queue of cars at carwash
         Queue<Car> carsQueueAtCarwash = new LinkedList<Car>();
-        carsQueueAtCarwash.add(new Toyota());
-        carsQueueAtCarwash.add(new Toyota());
-        carsQueueAtCarwash.add(new Toyota());
-        carsQueueAtCarwash.add(new Tesla());
+        carsQueueAtCarwash.add(new Toyota("887675"));
+        carsQueueAtCarwash.add(new Toyota("989988"));
+        carsQueueAtCarwash.add(new Toyota("878787"));
+        carsQueueAtCarwash.add(new Tesla("2211212"));
 
         Car nextInLine = carsQueueAtCarwash.remove();
 
@@ -57,12 +104,11 @@ public class App {
         // B: That is a tesla
 
 
-
         // Are fixed in size
         // Awkward for most cases
         Car[] carsArray = new Car[10];
-        carsArray[0] = new Tesla();
-        carsArray[1] = new Toyota();
+        carsArray[0] = new Tesla("898776");
+        carsArray[1] = new Toyota("21123232");
         for (int i = 0; i < carsArray.length; i++){
             if (carsArray[i] != null) {
                 System.out.println(carsArray[i].isElectric());
@@ -74,8 +120,8 @@ public class App {
         // Read more natural
         // More flexible
         List<Car> carsList = new ArrayList<Car>();
-        carsList.add(new Tesla());
-        carsList.add(new Toyota());
+        carsList.add(new Tesla("78765654"));
+        carsList.add(new Toyota("09987876"));
 
         for (int i = 0; i < carsList.size(); i++){
             System.out.println(carsList.get(i).isElectric());

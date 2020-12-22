@@ -2,7 +2,8 @@ package classes;
 
 public class Tesla extends Car {
 
-    public Tesla() {
+    public Tesla(String vin) {
+        super(vin);
         electric = true;
     }
 
