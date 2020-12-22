@@ -10,12 +10,21 @@ public class App {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
+
+    }
+
+
+
+
+
+
+
+    static void kiwiExample() {
         Kiwi kiwi = new Kiwi();
         kiwi.printGood();
 
         Kiwi veryGoodKiwi = new Kiwi(true);
         veryGoodKiwi.printGood("Super good");
-
     }
 
 
