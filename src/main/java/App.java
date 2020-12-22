@@ -9,10 +9,22 @@ public class App {
     public static void main(String[] args) throws InterruptedException, IOException {
 
 
-
-
     }
 
+    static void mapExample() {
+        // create naming conventions to quickly find objects
+        // key -> points to -> hashcode -> memory (not relevant how many keys)
+        Map<String, Car> carsByNickname = new HashMap<String, Car>();
+
+        carsByNickname.put("tez", new Tesla());
+        carsByNickname.put("goat", new Toyota());
+
+        Set<String> nicknames = carsByNickname.keySet();
+        for (int i = 0; i < nicknames.toArray().length; i++) {
+            System.out.println(nicknames.toArray()[i]);
+        }
+
+    }
 
 
 
