@@ -1,5 +1,3 @@
-import classes.*;
-import examples.RegexExample;
 import fruits.Kiwi;
 
 import java.io.IOException;
@@ -10,65 +8,65 @@ import cars.Tesla;
 import cars.Toyota;
 
 public class App {
-
-	private static String getSecret() {
-		return "do not tell anybody I like red hot chilli peppers";
-	}
 	
     public static void main(String[] args) throws InterruptedException, IOException {
-    	
-    	System.out.println(Utils.combineWords("hello", "everybody"));
 
-    	final boolean isDinner = true;
-    	
-    	abstract class Food {
-    		abstract String getName();
-    		abstract boolean isGood();
-    		boolean isDinner() {
-    			return isDinner;
-    		}
-    		
-    		void printDetails() {
-    			System.out.println(getName());
-    			System.out.println(isGood());
-    			System.out.println(getName() + " is dinner: " + isDinner());
-    		}
-    		
-    	}
-    	
-    	Food wasabi = new Food() {
-    		
-    		String getName() {
-    			return "wasabi";
-    		}
-    		
-    		boolean isGood() {
-    			return false;
-    		};
-    	};
-    	
-    	Food dosa = new Food() {
-    		
-    		String getName() {
-    			return "dosa";
-    		}
-    		
-    		boolean isGood() {
-    			return true;
-    		};
-    	};
-    	
-    	wasabi.printDetails();
-    	dosa.printDetails();
-    	
-    	
-    	
-    	
-    	
-    	
+        // try it here
+
     }
-    
-    
+
+    static void innerClassExample() {
+
+        System.out.println(Utils.combineWords("hello", "everybody"));
+
+        final boolean isDinner = true;
+
+        abstract class Food {
+            abstract String getName();
+            abstract boolean isGood();
+            boolean isDinner() {
+                return isDinner;
+            }
+
+            void printDetails() {
+                System.out.println(getName());
+                System.out.println(isGood());
+                System.out.println(getName() + " is dinner: " + isDinner());
+            }
+
+        }
+
+        Food wasabi = new Food() {
+
+            String getName() {
+                return "wasabi";
+            }
+
+            boolean isGood() {
+                return false;
+            };
+        };
+
+        Food dosa = new Food() {
+
+            String getName() {
+                return "dosa";
+            }
+
+            boolean isGood() {
+                return true;
+            };
+        };
+
+        wasabi.printDetails();
+        dosa.printDetails();
+
+    }
+
+    private static String getSecret() {
+        return "do not tell anybody I like red hot chilli peppers";
+    }
+
 	static class Utils {
 		
 		static String combineWords(String word1, String word2) {
