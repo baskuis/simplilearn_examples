@@ -1,4 +1,4 @@
-package classes;
+package fruits;
 
 public class Banana {
 
