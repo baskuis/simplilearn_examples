@@ -8,24 +8,21 @@ public class App {
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
+    	findInMapExample();
 
-        
 
     }
 
     static void findInMapExample() {
 
+
         Map<String, Car> cars = new HashMap<String, Car>();
 
-        // O(n) - List
-        // related to the size of the list
-        // bigger list - longer wait
-        // 2x bigger list - 2x longer wait
+        cars.put("123", new Tesla("123"));
+        cars.put("456", new Toyota("456"));
 
-        // O(1)
-        // not related to size of map
-        // bigger map - same wait
-        // 2x bigger map - same wait
+        // looking for a Tesla
+
 
         String needToFind = "123";
 
@@ -39,6 +36,16 @@ public class App {
 
         System.out.println(ourCar.getVin());
 
+        // O(n) - List (how long does it take to find an entry)
+        // related to the size of the list
+        // bigger list - longer wait
+        // 2x bigger list - 2x longer wait
+
+        // O(1) - Map (how long does it take to find an entry)
+        // not related to size of map
+        // bigger map - same wait
+        // 2x bigger map - same wait
+        
     }
 
     static void linkedListExample() {
