@@ -15,6 +15,32 @@ public class App {
 
     }
 
+    static void stringBufferBuilderExample() {
+        // fast but not thread safe
+        StringBuilder stringBuilder = new StringBuilder();
+
+        // thread safe
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer
+                .append("hello")
+                .append(" ")
+                .append("how")
+                .append(" ")
+                .append("are")
+                .append(" ")
+                .append("you");
+
+        System.out.println(stringBuffer.toString());
+    }
+
+    static void simpleStringConcatExample() {
+
+        System.out.println("hello" + " how " + "are" + " you");
+        System.out.println("hello" + 1 + 1 + 1 + 1);
+        System.out.println("hello" + (1 + 1 + 1 + 1));
+
+    }
+
     static void innerClassExample() {
 
         System.out.println(Utils.combineWords("hello", "everybody"));
