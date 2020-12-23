@@ -15,6 +15,25 @@ public class App {
 
     }
 
+    static void arrayExample() {
+
+
+        // array needs to be initialized with size
+        // array indexes start with 0
+        Integer[][] ourAgesYesterdayAndToday = new Integer[2][2];
+
+        ourAgesYesterdayAndToday[0][0] = 26;
+        ourAgesYesterdayAndToday[0][1] = 27;
+        ourAgesYesterdayAndToday[1][0] = 33;
+        ourAgesYesterdayAndToday[1][1] = 34;
+
+        for (int i = 0; i < ourAgesYesterdayAndToday.length; i++) {
+            System.out.println("One of us is " + ourAgesYesterdayAndToday[i][0] +  " today");
+            System.out.println("But they will be " + ourAgesYesterdayAndToday[i][1] +  " next year");
+        }
+        // cannot resize after the fact
+    }
+
     static void stringBufferBuilderExample() {
         // fast but not thread safe
         StringBuilder stringBuilder = new StringBuilder();
