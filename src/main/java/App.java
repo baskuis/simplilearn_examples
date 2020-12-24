@@ -14,7 +14,18 @@ public class App {
     public static void main(String[] args) throws InterruptedException, IOException {
 
         // try it here
+        String message = "Hi merry, santa.2007@northpole.io christmas eve!";
 
+        Pattern emailPattern = Pattern.compile("[ ]+([^ ]+@([^ ]{2,253}\\.[a-z]{2,55}))");
+
+        Matcher emailMatcher = emailPattern.matcher(message);
+
+        if (emailMatcher.find()) {
+            System.out.println("full group [" + emailMatcher.group() + "]");
+            System.out.println("group 1 [" + emailMatcher.group(1) + "]");
+            System.out.println("group 2 [" + emailMatcher.group(2) + "]");
+        }
+        
     }
 
     static void regexExample() {
