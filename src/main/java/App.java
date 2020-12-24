@@ -2,6 +2,8 @@ import fruits.Kiwi;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cars.Car;
 import cars.Tesla;
@@ -12,6 +14,24 @@ public class App {
     public static void main(String[] args) throws InterruptedException, IOException {
 
         // try it here
+
+    }
+
+    static void regexExample() {
+
+        String message = "Hello, how are you? The hamburger, at restaurant" +
+                "on 1234-123 street, WI 55321, U.S.A. you made was great. What was the recipe?" +
+                "Could let me know? Call me at +1 123-123-1234 please";
+
+        // regex --> why use it?
+
+        // need to know the phone number??
+
+        Pattern phoneMatch = Pattern.compile("[0-9]{3}-[0-9]{3}-[0-9]{4}");
+        Matcher phoneMatcher = phoneMatch.matcher(message);
+        if (phoneMatcher.find()) {
+            System.out.println(phoneMatcher.group());
+        }
 
     }
 
@@ -254,16 +274,3 @@ public class App {
 
 
 }
-
-
-/**
-
- //        ReadFileExample.readFile();
- //
- //        ThreadsExample.twoThreads();
- //
- //        FinallyRiddleExample.finallyRiddle();
-
- RegexExample.findTheMatch();
-
- */
