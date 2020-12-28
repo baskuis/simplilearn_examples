@@ -1,6 +1,10 @@
+import concurrency.Hare;
+import concurrency.Tortoise;
+import concurrency.Race;
 import fruits.Kiwi;
 
-import java.io.IOException;
+import java.io.*;
+import java.rmi.server.ExportException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,9 +15,47 @@ import cars.Toyota;
 
 public class App {
 	
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws Exception {
 
         // try it here
+        Tesla myTesla = (Tesla) readObject(new File("/Users/baskuis/projects/simplilearn/mytesla.txt"));
+
+        System.out.println(myTesla.getVin());
+
+    }
+
+    public static void serializationExample()  throws IOException {
+        Tesla tesla = new Tesla("123");
+        writeObject(tesla, new File("/Users/baskuis/projects/simplilearn/mytesla.txt"));
+    }
+
+    public static void multiThreadingExample() throws InterruptedException {
+        final Race race = new Race();
+
+        Hare hare = new Hare(race);
+        Thread.sleep(5);
+        Tortoise tortoise = new Tortoise(race);
+
+
+        new Thread(tortoise).start();
+        hare.start();
+    }
+
+    public static void writeObject(Object obj, File file) throws IOException {
+        FileOutputStream fos = new FileOutputStream(file);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(obj);
+        oos.flush();
+    }
+
+    public static Object readObject(File file) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        return ois.readObject();
+    }
+
+    static void regexWithGroupsExample() {
+
         String message = "Hi merry, santa.2007@northpole.io christmas eve!";
 
         Pattern emailPattern = Pattern.compile("[ ]+(([a-z]+).[0-9]+@([^ ]{2,253}\\.[a-z]{2,55}))");
