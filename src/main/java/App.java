@@ -17,11 +17,57 @@ public class App {
 	
     public static void main(String[] args) throws Exception {
 
+        
+
+    }
+
+    public static void restoreToyotaFromFile() throws Exception {
+        File ourToyotaFile = new File("/Users/baskuis/projects/simplilearn/mytoyota.txt");
+        FileInputStream ourToyotaFileStream = new FileInputStream(
+                ourToyotaFile
+        );
+        ObjectInputStream ourToyotaFileObject = new ObjectInputStream(ourToyotaFileStream);
+
+        Toyota ourNiceToyota = (Toyota) ourToyotaFileObject.readObject();
+
+        System.out.println(ourNiceToyota.getVin());
+
+        // we want our toyota instance back
+    }
+
+    public static void saveToyotaToFile() throws Exception {
+        Toyota toyota = new Toyota("123456789");
+
+        FileOutputStream fos = new FileOutputStream(
+                new File("/Users/baskuis/projects/simplilearn/mytoyota.txt")
+        );
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(toyota);
+        oos.flush();
+
+        System.out.println("Done");
+    }
+
+    public static void tryCatchExample() {
+        String amIANumber = "BLA-12";
+        try {
+            System.out.println(
+                    Integer.valueOf(amIANumber)
+            );
+        } catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("Oops something is wrong");
+        } finally {
+            System.out.println("All done");
+        }
+    }
+
+    public static void deserializtionExample() throws Exception {
         // try it here
         Tesla myTesla = (Tesla) readObject(new File("/Users/baskuis/projects/simplilearn/mytesla.txt"));
 
         System.out.println(myTesla.getVin());
-
     }
 
     public static void serializationExample()  throws IOException {
