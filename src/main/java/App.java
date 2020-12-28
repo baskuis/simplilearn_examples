@@ -17,8 +17,66 @@ public class App {
 	
     public static void main(String[] args) throws Exception {
 
-        
+        tortoiseAndHareRace();
 
+    }
+
+    public static void tortoiseAndHareRace() throws Exception {
+
+        /*
+         * race -----------------------------------------------------------|
+         *        \--tortoise------------------------------------WAKE UP!--/
+         *        \--hare-------------------------NAP----------------------/
+         */
+        Race race = new Race();
+        Tortoise tortoise = new Tortoise(race);
+        Hare hare = new Hare(race);
+
+        hare.start(); // starts the hare thread
+        tortoise.start(); // starts the tortoise thread
+
+        hare.join();
+        tortoise.join();
+
+        // how do we know the race is finished?
+        System.out.println("RACE FINISHED");
+    }
+
+    public static void manyThreadExample() throws Exception {
+
+        Thread.sleep(5000);
+        for (int a = 0; a < 200; a++) {
+
+            Thread bwmThread = new Thread() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < 100; i++) {
+                        try {
+                            sleep(500L);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("BMW " + i);
+                    }
+                }
+            };
+
+            Thread audiThread = new Thread() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < 100; i++) {
+                        try {
+                            sleep(5L);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("AUDI " + i);
+                    }
+                }
+            };
+            bwmThread.start();
+            audiThread.start();
+        }
     }
 
     public static void restoreToyotaFromFile() throws Exception {

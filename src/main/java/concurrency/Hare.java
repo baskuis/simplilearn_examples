@@ -15,7 +15,9 @@ public class Hare extends Thread {
                 sleep(1L);
                 synchronized (race) {
                     if (i == 80) {
+                        System.out.println("Hare taking nap");
                         race.wait();
+                        System.out.println("Hare is woken up");
                     }
                     race.setHare(i);
                     race.liveView();

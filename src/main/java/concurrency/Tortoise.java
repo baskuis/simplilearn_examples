@@ -1,6 +1,6 @@
 package concurrency;
 
-public class Tortoise implements Runnable {
+public class Tortoise extends Thread {
 
     final Race race;
 
@@ -14,6 +14,7 @@ public class Tortoise implements Runnable {
                 Thread.sleep(1L);
                 synchronized (race) {
                     if (i == 98) {
+                        System.out.println("Tortoise yelles at Hare");
                         race.notify();
                     }
                     race.setTortoise(i);
