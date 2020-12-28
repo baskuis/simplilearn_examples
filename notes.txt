@@ -1,0 +1,236 @@
+
+Atomic ?? what does that mean
+- there is one 
+- base level 
+- simplest 
+
+Atomic counter .. 
+
+class MyNumber {
+
+	int number = 0;
+	
+	int increment(int by) {
+		number = number + by;
+	}
+	
+	int getNumber() {
+		return this.number;
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Race between the tortoise and the hare.
+
+hare is fast but arrogant
+tortoise is slow but persistent
+
+- hare get's far ahead - and takes a nap before finishing
+- by the time he wakes up
+- the tortoise is too far ahead
+- the hare runs as fast as he can 
+- but the tortoise wins the race
+
+-------------------------------------------
+
+race -----------------------------------------------------------|
+       \--tortoise------------------------------------WAKE UP!--/
+       \--hare-------------------------NAP----------------------/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----
+
+
+
+how may can I have? 
+- no real limit - you can have 1000's 
+
+- how many should I have? 
+	- depends on the runtime environment - how many CPU's??
+	- if that is not clear - keep below 20
+	
+	
+	20 threads but only 1 CPU core
+		- what happens 
+		CPU -> context switching  
+			-> run some part of a thread - then 'switch' to another
+			-> context switching - requires memory to be moved 
+				-> expensive/slow
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ - Application
+ 	- Controller 
+ 		- Service 
+ 			- Service B 
+ 				- Client (HTTP)
+ 					- Library 
+ 						- Library Component 
+ 							- Throws error / has error
+
+ If you had to write code to pass errors up to the Controller
+ - that would be a lot of work
+ - error prone 
+
+
+ 						<- pass the error back
+ 					<- Library pass the error back
+ 				<- Client pass the error back
+ 			<- Service B pass the error back
+ 		<- Service pass the error back 
+ 	<- Controller - shows the error to the customer
+>
+
+
+ - Application
+ 	- Controller 
+ 		- Service 
+ 			- Service B 
+ 				- Client (HTTP)
+ 					- Library 
+ 						- Library Component 
+ 							- Throws error / has error
+ 							- throw new Exception("Unable to parse BLA-12") -> Thread stops here and jumps to the next 'relevant' try block -> catch clause
+
+ 	Controller:
+ 		try {
+	 		try {
+	 			Service.call()
+	 		} catch (Exception) {
+		 		// AA
+	 		}
+ 		} catch (Exception e) {
+	 		// BB
+	 	}
+
+ 						<- Error is thrown 
+ 					....
+ 				....
+ 			....
+ 		.... 
+ 	<- Controller - shows the error to the customer
+
+
+
+
+
+
+Polymorphism - Java??
+
+Ability for objects to take different forms 
+ - compile-time
+ 	- overloading
+ - runtime 
+ 	- dynamic method
+ 	- closures 
+
+
+
+Why is the point? 
+ - readable --- handle difficult things better
+ 	- understandable? 
+ - code re-use 
+ - flexibility 
+ - objects .. are a way of grouping like things 
+ - categorize .. taxonomy/categories .. not perfect 
+ - pragmatic .. efficient .. need flexibility 
+ 
+ account for anything that doesn't match existing taxonomy
+ - also - DRY - (Don't repeat yourself)
+ 	- less code
+ 	- generalizing
+ 	
+ 
+ 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+String message = "Hi merry, santa.2007@northpole.io Christmas eve!";
+
+Pattern.compile("[\s]+[^\s]+@[^\s]{2,253}.[a-b]{2,55}");
+
+[\s]+[^\s]+@[^\s]{2,253}.[a-b]{2,55}
+
+^ - start of string
+$ - end of string
+
+-- pattern
+[0-9a-zU.*] match one character of for example, 5 or t or U or . or *
+-- special character within []
+^ - NOT
+
+-- Quantifiers
+[somestuff]+          // 1 or more
+[somestuff]?          // 0 or 1
+[somestuff]*          // 0 or more
+[somestuff]{3}        // needs to be 3
+
+I WAS NOT CORRECT - [somestuff]{3-5}      // doesn't work -- sorry
+I WAS NOT CORRECT - [somestuff]{3,5}      // needs to be 3 or 5 <- range
+
+
+
