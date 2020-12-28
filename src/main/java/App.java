@@ -6,6 +6,7 @@ import fruits.Kiwi;
 import java.io.*;
 import java.rmi.server.ExportException;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,9 +29,10 @@ public class App {
          *        \--tortoise------------------------------------WAKE UP!--/
          *        \--hare-------------------------NAP----------------------/
          */
+        AtomicInteger stepCounter = new AtomicInteger();
         Race race = new Race();
-        Tortoise tortoise = new Tortoise(race);
-        Hare hare = new Hare(race);
+        Tortoise tortoise = new Tortoise(race, stepCounter);
+        Hare hare = new Hare(race, stepCounter);
 
         hare.start(); // starts the hare thread
         tortoise.start(); // starts the tortoise thread
@@ -131,18 +133,6 @@ public class App {
     public static void serializationExample()  throws IOException {
         Tesla tesla = new Tesla("123");
         writeObject(tesla, new File("/Users/baskuis/projects/simplilearn/mytesla.txt"));
-    }
-
-    public static void multiThreadingExample() throws InterruptedException {
-        final Race race = new Race();
-
-        Hare hare = new Hare(race);
-        Thread.sleep(5);
-        Tortoise tortoise = new Tortoise(race);
-
-
-        new Thread(tortoise).start();
-        hare.start();
     }
 
     public static void writeObject(Object obj, File file) throws IOException {

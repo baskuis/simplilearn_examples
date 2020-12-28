@@ -1,16 +1,23 @@
 package concurrency;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Hare extends Thread {
 
     final Race race;
 
-    public Hare(Race race) {
+    final AtomicInteger steps;
+
+    public Hare(Race race, AtomicInteger steps) {
         this.race = race;
+        this.steps = steps;
     }
 
     @Override
     public void run() {
         for (int i = 0; i <= 100; i+=5) {
+            int totalSteps = steps.getAndIncrement();
+            System.out.println("totalSteps: " + totalSteps);
             try {
                 sleep(1L);
                 synchronized (race) {
