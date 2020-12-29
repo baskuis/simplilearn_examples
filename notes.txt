@@ -1,4 +1,47 @@
 
+
+void method() throws SomeException {
+	
+}
+Checked?? (required)
+Unchecked?? (optional)
+Both?? (yeah you can do it for both)
+
+MyException extends Exception (Checked)
+MyException extends RuntimeException (Un-Checked)
+
+throw new MyException()
+
+try {
+	??? Try some code 
+} 
+
+catch (MyException e) {
+	??? Catches exception // handles // recover? // log?
+}
+
+finally {
+	??? No matter what .. do this
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Exceptions... 
 
 Example:
@@ -19,11 +62,11 @@ checked vs unchecked
 You'll choose:
 
 Unchecked exception:
-NullPointerException -> RunTimeException -> Exception -> Throwable
+NullPointerException -> RuntimeException -> Exception -> Throwable
 ----------------------- makes it unchecked ------------ makes it throwable
 
 - not a real issue for application to run correctly
-- writing less code // relying more on convention
+- writing less code // relying more on (loose working agreement, tribal/documented)
 - frameworks/tools usually handle these ok
 
 Checked exception:
@@ -31,7 +74,7 @@ MyCheckedException -> Exception -> Throwable
 ----------------------------------- makes it throwable
 
 - real issue for application to run correctly
-- writing more code // relying less on convention
+- writing more code // relying less on (loose working agreement, tribal/documented)
 - explicitly choose not to collaborate with external frameworks 
 
 
