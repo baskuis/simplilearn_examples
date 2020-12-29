@@ -1,6 +1,7 @@
 package dundermifflin.newyork;
 
 import dundermifflin.DistributionCenter;
+import dundermifflin.thingthatcangowrong.DeliveryRefusedException;
 
 public class NewYorkDistributionCenter extends DistributionCenter {
 
@@ -12,8 +13,11 @@ public class NewYorkDistributionCenter extends DistributionCenter {
     }
 
     static class DeliveryBicycle {
-        final int maxWeight = 20;
         void deliver(DistributionCenter.Product product) {
+            if (product.name.equals("kettlebells")) {
+                System.out.println("Not delivering heavy product");
+                throw new DeliveryRefusedException("Not delivering heavy product");
+            }
             System.out.println("Bicycle delivering product " + product.name);
         }
     }

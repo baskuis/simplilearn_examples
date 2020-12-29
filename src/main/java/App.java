@@ -2,6 +2,7 @@ import concurrency.Hare;
 import concurrency.Tortoise;
 import concurrency.Race;
 import dundermifflin.PaperCompany;
+import dundermifflin.thingthatcangowrong.DeliveryRefusedException;
 import fruits.Kiwi;
 
 import java.io.*;
@@ -19,12 +20,6 @@ public class App {
 	
     public static void main(String[] args) {
 
-        PaperCompany dunderMifflin = new PaperCompany();
-        dunderMifflin.receiveShipments();
-        dunderMifflin.receiveOrders();
-        dunderMifflin.processOrders();
-
-        dunderMifflin.printSummary();
 
     }
 
@@ -34,8 +29,13 @@ public class App {
 
 
 
-
-
+    public static void paperCompanyExceptions() {
+        PaperCompany dunderMifflin = new PaperCompany();
+        dunderMifflin.receiveShipments();
+        dunderMifflin.receiveOrders();
+        dunderMifflin.processOrders();
+        dunderMifflin.printSummary();
+    }
 
     public static void anotherTryCatchExample() {
         String input = "BANANAS 12";
