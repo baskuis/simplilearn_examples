@@ -1,6 +1,7 @@
 import concurrency.Hare;
 import concurrency.Tortoise;
 import concurrency.Race;
+import dundermifflin.PaperCompany;
 import fruits.Kiwi;
 
 import java.io.*;
@@ -16,10 +17,36 @@ import cars.Toyota;
 
 public class App {
 	
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        tortoiseAndHareRace();
+        PaperCompany dunderMifflin = new PaperCompany();
+        dunderMifflin.receiveShipments();
+        dunderMifflin.receiveOrders();
+        dunderMifflin.processOrders();
 
+        dunderMifflin.printSummary();
+
+    }
+
+
+
+
+
+
+
+
+
+
+    public static void anotherTryCatchExample() {
+        String input = "BANANAS 12";
+        try {
+            Integer number = Integer.valueOf(input);
+            System.out.println("Our number is:" + number);
+        } catch (Exception e) {
+            System.out.println("Oops there was an issue");
+        } finally {
+            System.out.println("Done trying to convert " + input);
+        }
     }
 
     public static void tortoiseAndHareRace() throws Exception {

@@ -1,4 +1,56 @@
 
+Exceptions... 
+
+Example:
+
+NullPointerException
+- NPE
+- Happens a lot
+
+Checked or unchecked?
+A: Checked
+B: Unchecked
+
+checked vs unchecked
+?? how do we know - what makes it checked vs unchecked?
+
+
+----------------------------------------
+You'll choose:
+
+Unchecked exception:
+NullPointerException -> RunTimeException -> Exception -> Throwable
+----------------------- makes it unchecked ------------ makes it throwable
+
+- not a real issue for application to run correctly
+- writing less code // relying more on convention
+- frameworks/tools usually handle these ok
+
+Checked exception:
+MyCheckedException -> Exception -> Throwable
+----------------------------------- makes it throwable
+
+- real issue for application to run correctly
+- writing more code // relying less on convention
+- explicitly choose not to collaborate with external frameworks 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Atomic ?? what does that mean
 - there is one 
 - base level 
@@ -20,6 +72,9 @@ class MyNumber {
 
 }
 
+??
+
+It's a version that is safe to be shared across multiple threads
 
 
 
