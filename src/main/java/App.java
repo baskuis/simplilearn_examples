@@ -1,6 +1,9 @@
 import cars.Car;
 import cars.Tesla;
 import cars.Toyota;
+import cereals.AbstractCereal;
+import cereals.CocoPuffsCereal;
+import cereals.SoggyFruitLoopsCereal;
 import concurrency.Hare;
 import concurrency.Race;
 import concurrency.Tortoise;
@@ -20,23 +23,17 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        PaperCompany dunderMifflin = new PaperCompany();
-        dunderMifflin.receiveShipments();
-        dunderMifflin.receiveOrders();
-        dunderMifflin.processOrders();
-        dunderMifflin.printSummary();
 
     }
 
-    //        Files.write(
-//                Paths.get("/Users/baskuis/orderevents.txt"),
-//                "the thingasdfdsfafds\n".getBytes(),
-//                StandardOpenOption.APPEND);
-////
-////        File books = new File("/Users/baskuis/thebooks.txt");
-////        FileOutputStream fileOutputStream = new FileOutputStream(books);
-////        fileOutputStream.write("hello\n".getBytes());
-
+    public static void abstractClassExample() {
+        List<AbstractCereal> cereals = new ArrayList<>();
+        cereals.add(new SoggyFruitLoopsCereal());
+        cereals.add(new CocoPuffsCereal());
+        for (AbstractCereal cereal : cereals) {
+            cereal.willIEatIt();
+        }
+    }
 
     public static void paperCompanyExceptions() {
         PaperCompany dunderMifflin = new PaperCompany();
