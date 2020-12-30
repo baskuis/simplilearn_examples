@@ -1,32 +1,41 @@
+import cars.Car;
+import cars.Tesla;
+import cars.Toyota;
 import concurrency.Hare;
-import concurrency.Tortoise;
 import concurrency.Race;
+import concurrency.Tortoise;
 import dundermifflin.PaperCompany;
-import dundermifflin.thingthatcangowrong.DeliveryRefusedException;
 import fruits.Kiwi;
 
 import java.io.*;
-import java.rmi.server.ExportException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import cars.Car;
-import cars.Tesla;
-import cars.Toyota;
-
 public class App {
-	
-    public static void main(String[] args) {
 
+    public static void main(String[] args) throws IOException {
+
+        PaperCompany dunderMifflin = new PaperCompany();
+        dunderMifflin.receiveShipments();
+        dunderMifflin.receiveOrders();
+        dunderMifflin.processOrders();
+        dunderMifflin.printSummary();
 
     }
 
-
-
-
-
+    //        Files.write(
+//                Paths.get("/Users/baskuis/orderevents.txt"),
+//                "the thingasdfdsfafds\n".getBytes(),
+//                StandardOpenOption.APPEND);
+////
+////        File books = new File("/Users/baskuis/thebooks.txt");
+////        FileOutputStream fileOutputStream = new FileOutputStream(books);
+////        fileOutputStream.write("hello\n".getBytes());
 
 
     public static void paperCompanyExceptions() {
@@ -141,7 +150,7 @@ public class App {
             System.out.println(
                     Integer.valueOf(amIANumber)
             );
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
             System.out.println("Oops something is wrong");
@@ -157,7 +166,7 @@ public class App {
         System.out.println(myTesla.getVin());
     }
 
-    public static void serializationExample()  throws IOException {
+    public static void serializationExample() throws IOException {
         Tesla tesla = new Tesla("123");
         writeObject(tesla, new File("/Users/baskuis/projects/simplilearn/mytesla.txt"));
     }
@@ -237,8 +246,8 @@ public class App {
         ourAgesYesterdayAndToday[1][1] = 34;
 
         for (int i = 0; i < ourAgesYesterdayAndToday.length; i++) {
-            System.out.println("One of us is " + ourAgesYesterdayAndToday[i][0] +  " today");
-            System.out.println("But they will be " + ourAgesYesterdayAndToday[i][1] +  " next year");
+            System.out.println("One of us is " + ourAgesYesterdayAndToday[i][0] + " today");
+            System.out.println("But they will be " + ourAgesYesterdayAndToday[i][1] + " next year");
         }
         // cannot resize after the fact
     }
@@ -277,7 +286,9 @@ public class App {
 
         abstract class Food {
             abstract String getName();
+
             abstract boolean isGood();
+
             boolean isDinner() {
                 return isDinner;
             }
@@ -298,7 +309,9 @@ public class App {
 
             boolean isGood() {
                 return false;
-            };
+            }
+
+            ;
         };
 
         Food dosa = new Food() {
@@ -309,7 +322,9 @@ public class App {
 
             boolean isGood() {
                 return true;
-            };
+            }
+
+            ;
         };
 
         wasabi.printDetails();
@@ -321,13 +336,13 @@ public class App {
         return "do not tell anybody I like red hot chilli peppers";
     }
 
-	static class Utils {
-		
-		static String combineWords(String word1, String word2) {
-			return word1.concat(" ").concat(word2).concat(getSecret());
-		}
-		
-	}
+    static class Utils {
+
+        static String combineWords(String word1, String word2) {
+            return word1.concat(" ").concat(word2).concat(getSecret());
+        }
+
+    }
 
     static void findInMapExample() {
 
@@ -361,7 +376,7 @@ public class App {
         // not related to size of map
         // bigger map - same wait
         // 2x bigger map - same wait
-        
+
     }
 
     static void linkedListExample() {
@@ -374,8 +389,7 @@ public class App {
         // why ??
 
 
-
-        for (int i = 0; i < cars.size(); i++){
+        for (int i = 0; i < cars.size(); i++) {
             System.out.println(cars.get(i).isElectric());
         }
     }
@@ -394,7 +408,6 @@ public class App {
         }
 
     }
-
 
 
     static void collectionsExamples() {
@@ -432,7 +445,7 @@ public class App {
         Car[] carsArray = new Car[10];
         carsArray[0] = new Tesla("898776");
         carsArray[1] = new Toyota("21123232");
-        for (int i = 0; i < carsArray.length; i++){
+        for (int i = 0; i < carsArray.length; i++) {
             if (carsArray[i] != null) {
                 System.out.println(carsArray[i].isElectric());
             } else {
@@ -446,11 +459,10 @@ public class App {
         carsList.add(new Tesla("78765654"));
         carsList.add(new Toyota("09987876"));
 
-        for (int i = 0; i < carsList.size(); i++){
+        for (int i = 0; i < carsList.size(); i++) {
             System.out.println(carsList.get(i).isElectric());
         }
     }
-
 
 
     static void kiwiExample() {

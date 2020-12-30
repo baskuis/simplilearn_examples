@@ -1,5 +1,7 @@
 package dundermifflin;
 
+import dundermifflin.accounting.AccountingDepartment;
+import dundermifflin.it.ItDepartment;
 import dundermifflin.newyork.NewYorkDistributionCenter;
 import dundermifflin.scanton.ScantonDistributionCenter;
 import dundermifflin.thingthatcangowrong.DeliveryRefusedException;
@@ -13,6 +15,10 @@ import java.util.Map;
 public class PaperCompany {
 
     Map<String, DistributionCenter> distributionCenters = new HashMap<String, DistributionCenter>();
+
+    ItDepartment itDepartment = new ItDepartment();
+
+    AccountingDepartment accountingDepartment = new AccountingDepartment();
 
     List<Order> orders = new ArrayList<Order>();
 
@@ -55,7 +61,7 @@ public class PaperCompany {
         try {
             orders.add(order);
         } catch (Exception e) {
-            System.out.println("Unable to receive order. Message: " + e.getMessage());
+            itDepartment.logIssue("Unable to receive order. Message: " + e.getMessage());
         }
     }
 
@@ -64,30 +70,29 @@ public class PaperCompany {
             try {
                 this.processOrder(order);
             } catch (DeliveryRefusedException e) {
-                System.out.println("Delivery refused. Message: " + e.getMessage());
-                System.out.println("Attempting to ship from scranton instead");
+                itDepartment.logIssue("Delivery refused. Message: " + e.getMessage());
+                itDepartment.logIssue("Attempting to ship from scranton instead");
                 order.closestLocation = "scranton";
                 try {
                     this.processOrder(order);
                 } catch (Exception error) {
-                    System.out.println("Unable to try delivery again after shipping from scranton instead. Message: " + error.getMessage());
+                    itDepartment.logIssue("Unable to try delivery again after shipping from scranton instead. Message: " + error.getMessage());
                 }
             } catch (DeliveryUnavailableException e) {
-                System.out.println("Delivery unavailable. Message: " + e.getMessage());
-
-                System.out.println("Fixing the truck");
+                itDepartment.logIssue("Delivery unavailable. Message: " + e.getMessage());
+                itDepartment.logIssue("Fixing the truck");
                 ((ScantonDistributionCenter) distributionCenters.get("scranton"))
                         .deliveryTruck.setBroken(false);
                 try {
-                    System.out.println("Retrying the order");
+                    itDepartment.logIssue("Retrying the order");
                     this.processOrder(order);
                 } catch (Exception error) {
-                    System.out.println("Unable to try delivery again after fixing truck. Message: " + error.getMessage());
+                    itDepartment.logIssue("Unable to try delivery again after fixing truck. Message: " + error.getMessage());
                 }
             } catch (Exception e) {
-                System.out.println("Delivery not possible. Message: " + e.getMessage());
+                itDepartment.logIssue("Delivery not possible. Message: " + e.getMessage());
             } finally {
-                System.out.println("========= moving on =========");
+                itDepartment.logIssue("========= moving on =========");
             }
         }
     }
@@ -102,6 +107,11 @@ public class PaperCompany {
 
         /** Order is processed */
         order.setProcessed(true);
+
+        /** Capture in ledger */
+        this.accountingDepartment.addToLedger(
+                order.toString()
+        );
 
         /** Needs to be accurate */
         revenueProcessed += order.price;
@@ -121,6 +131,17 @@ public class PaperCompany {
             this.closestLocation = closestLocation;
             this.size = size;
             this.price = price;
+        }
+
+        @Override
+        public String toString() {
+            return "Order{" +
+                    "processed=" + processed +
+                    ", product='" + product + '\'' +
+                    ", closestLocation='" + closestLocation + '\'' +
+                    ", size=" + size +
+                    ", price=" + price +
+                    '}';
         }
 
         boolean processed = false;
