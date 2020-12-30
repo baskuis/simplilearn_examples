@@ -1,6 +1,8 @@
 import cars.Car;
 import cars.Tesla;
 import cars.Toyota;
+import catsanddogs.Brutus;
+import catsanddogs.Rufus;
 import cereals.AbstractCereal;
 import cereals.CocoPuffsCereal;
 import cereals.SoggyFruitLoopsCereal;
@@ -23,6 +25,21 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        catsAndDogs();
+
+    }
+
+    public static void catsAndDogs() {
+
+        Rufus rufus = new Rufus();
+        System.out.println("alive: " + rufus.isAlive());
+        System.out.println("name: " + rufus.myName());
+        rufus.bark();
+
+        Brutus brutus = new Brutus();
+       // System.out.println("alive: " + brutus.getAnimal().isAlive());
+        System.out.println("name: " + brutus.myName());
+       // brutus.getCat().meow();
 
     }
 
