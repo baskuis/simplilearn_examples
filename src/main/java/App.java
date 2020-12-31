@@ -11,6 +11,9 @@ import concurrency.Race;
 import concurrency.Tortoise;
 import dundermifflin.PaperCompany;
 import fruits.Kiwi;
+import videogames.HalfLife;
+import videogames.SciFi;
+import videogames.SuperMario;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -26,8 +29,12 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        abstractClassExample();
+    }
 
+    public static void games() {
+        HalfLife halfLife = new HalfLife();
+        halfLife.showNumberOfWeapons();
+        SuperMario superMario = new SuperMario();
     }
 
     public static void catsAndDogs() {

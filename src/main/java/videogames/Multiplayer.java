@@ -2,6 +2,8 @@ package videogames;
 
 public interface Multiplayer {
 
-    int numberOfWeapons();
+    int numberOfPlayers();
+
+    int killCounter();
 
 }
