@@ -1,5 +1,209 @@
 
 
+Diamond problem
+
+
+                  Animal
+                    /\
+                   /  \
+                  /    \
+             Cat /      \ Dog
+				 \	    / 
+				  \    /
+                   \  /
+                    \/ --- in Java these lines can't meet
+                   Pet
+
+
+What are the implications?
+ - What if 
+ 	Dog -> public String soundItMakes();
+    Cat -> public String soundItMakes();
+		Pet -> public String soundItMakes(); ?? which is it?? 
+			-> wouldn't be clear which it is
+			-> compiler could make some choices - use Dog .. or Cat .. or neither?
+	Java .. compiler .. just won't let you do this.
+	
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A:
+===============================================
+Strong association - Rufus extends Dog etc...
+Rufus is a Dog
+Dog is a Mammal
+Mammal is an Animal
+
+
+B:
+===============================================
+Weak association - Rufus contains Dog etc...
+Rufus has a Dog
+Dog has a Mammal
+Mammal has an Animal
+
+
+A feel more natural
+
+----------------------------
+
+B is much more common .. 
+ - 
+
+
+
+
+
+
+
+
+
+
+
+
+inheritance 
+
+specific --> more generic 
+
+
+
+Rufus     -> Dog       -> Mammal    -> Animal -> Living -> Object
+
+has name  -> has breed -> offspring -> 
+can bark
+
+
+Brutus    -> Cat       -> Mammal    -> Animal -> Living -> Object 
+
+has name  -> has breed -> offspring -> 
+can meow
+
+-----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+abstract class Cereal {
+	
+	abstract boolean itIsGood();
+	
+	abstract String getName();
+	
+	boolean willIEatIt() {
+		if (itIsGood()) {
+			return true;
+		}
+		System.out.println("Not eating " + getName() + " is it not good");
+		return false;
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+java 
+- folders and files
+files all have a *.java extension
+each *.java file has a matching public class inside
+
+ie: 
+	- MyObject.java contains [public class MyObject]
+
+packages are .. just .. folders 
+
+jar? what is a lot like zip archive of the compiled class files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void method() throws SomeException {
 	
 }
