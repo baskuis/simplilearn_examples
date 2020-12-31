@@ -29,6 +29,13 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        PaperCompany dunderMifflin = new PaperCompany();
+        dunderMifflin.receiveShipments();
+        dunderMifflin.readFromFile();
+        //dunderMifflin.receiveOrders();
+        dunderMifflin.processOrders();
+        dunderMifflin.printSummary();
+
     }
 
     public static void games() {

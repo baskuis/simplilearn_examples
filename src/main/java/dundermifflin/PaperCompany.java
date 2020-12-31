@@ -6,7 +6,12 @@ import dundermifflin.newyork.NewYorkDistributionCenter;
 import dundermifflin.scanton.ScantonDistributionCenter;
 import dundermifflin.thingthatcangowrong.DeliveryRefusedException;
 import dundermifflin.thingthatcangowrong.DeliveryUnavailableException;
+import videogames.SuperMario;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,6 +51,32 @@ public class PaperCompany {
         distributionCenters.get("newyork").receiveShipment(new DistributionCenter.Product(
                 "kettlebells", 5
         ));
+    }
+
+    public void readFromFile() throws IOException {
+        File orderInputFile = new File("/Users/baskuis/projects/simplilearn/orders.csv");
+        FileInputStream fileInputStream = new FileInputStream(orderInputFile);
+        int r = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        while((r = fileInputStream.read()) != -1) {
+            stringBuilder.append((char)r);
+        }
+        String orders = stringBuilder.toString();
+        System.out.println(orders);
+        String[] lines = orders.split("\n");
+        for (String line : lines) {
+            String[] columns = line.split(",");
+            if (columns.length == 4) {
+                Order order = new Order(
+                        columns[0],
+                        columns[1],
+                        Integer.parseInt(columns[2]),
+                        Float.parseFloat(columns[3])
+                );
+                receiveOrder(order);
+            }
+
+        }
     }
 
     public void receiveOrders() {
