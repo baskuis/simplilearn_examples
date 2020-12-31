@@ -20,12 +20,13 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class App {
 
     public static void main(String[] args) throws IOException {
 
-        catsAndDogs();
+        abstractClassExample();
 
     }
 
@@ -37,9 +38,9 @@ public class App {
         rufus.bark();
 
         Brutus brutus = new Brutus();
-       // System.out.println("alive: " + brutus.getAnimal().isAlive());
+        System.out.println("alive: " + brutus.getAnimal().isAlive());
         System.out.println("name: " + brutus.myName());
-       // brutus.getCat().meow();
+        brutus.getCat().meow();
 
     }
 
@@ -50,6 +51,12 @@ public class App {
         for (AbstractCereal cereal : cereals) {
             cereal.willIEatIt();
         }
+        System.out.println(
+                cereals.stream()
+                        .collect(Collectors
+                                .toMap(AbstractCereal::getClass, AbstractCereal::willIEatIt)
+                        )
+        );
     }
 
     public static void paperCompanyExceptions() {
