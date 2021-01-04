@@ -10,6 +10,7 @@ import concurrency.Hare;
 import concurrency.Race;
 import concurrency.Tortoise;
 import dundermifflin.PaperCompany;
+import excersizes.ArrayRotation;
 import fruits.Kiwi;
 import videogames.HalfLife;
 import videogames.SciFi;
@@ -29,13 +30,17 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        ArrayRotation.rotateArray();
+
+    }
+
+    public static void readFromFileDunderMifflin() throws IOException {
         PaperCompany dunderMifflin = new PaperCompany();
         dunderMifflin.receiveShipments();
         dunderMifflin.readFromFile();
         //dunderMifflin.receiveOrders();
         dunderMifflin.processOrders();
         dunderMifflin.printSummary();
-
     }
 
     public static void games() {

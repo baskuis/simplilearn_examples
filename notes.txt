@@ -1,5 +1,104 @@
 
 
+
+ maven
+ - what is it? 
+ 
+ /src
+ /src/java
+ /src/java/main
+ /src/java/main/com
+ /src/java/main/com/company
+ /src/java/main/com/company/Main.java
+ 
+ MAVEN solves these questions
+  - but I want to use a database (just an example)?
+  	- go community - and look existing code (jar)
+  		- any popular maven repository
+  - pom.xml --- (file that has locations and version of other code we use)		
+  		
+  - I'm going use existing code 
+  	- 1.) find where it is --- maven repository (web accessible)
+  	- 2.) and download it --- maven downloads jars
+  	- 3.) use it --- maven packages jars with my code/project
+  		- lot's of possible options here --- maven learning curve starts here
+ 
+ in the end:
+ 
+ we have a 'package' 
+ [ 		
+	 /src --- our code
+	 /libs --- the community code
+	 	/multiple community components 
+ ]	
+ 
+ jar .. 
+ - it's like a zip archive - but with a jar extension
+ - inside are class files (our code)
+ - inside are other jar files (other people's code)
+ - inside are some configuration files - like a MANIFEST.MF and other things to help the jvm read it correctly. 
+ 	- MAVEN takes care of doing this - it calls it packaging.
+ 	
+ - MAVEN -> our project -> creates a jar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data structures in Java?
+ - what are they?
+ - Different ways to store data 
+ 	- Choose one over the other depending on how you use it?
+ - Collection of data and way to interact with it
+ - Arrays/Queue/List/Stack
+ - key / value pairs
+ - multiple bits of data
+ 	- how to keep them organized?
+ 
+real world example:	(Last In First Out)
+ - clothes 
+   - drawer 
+     - things you wear like are? 
+       - sits on top
+
+digital example: (Last In First Out)    	
+ - users of a webstore 
+   - answer questions about new users 
+     - how would you store them
+ 
+- program slows down
+
+     	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Diamond problem
 
 
