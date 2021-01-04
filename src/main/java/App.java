@@ -12,6 +12,7 @@ import concurrency.Tortoise;
 import dundermifflin.PaperCompany;
 import excersizes.ArrayRotation;
 import excersizes.OrderStatistics;
+import excersizes.OurSinglyLinkedList;
 import excersizes.RangeAndMatrix;
 import fruits.Kiwi;
 import videogames.HalfLife;
@@ -32,7 +33,16 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        RangeAndMatrix.rangeMatrix();
+        OurSinglyLinkedList<String> ourNames = new OurSinglyLinkedList<>();
+        ourNames.add("Narges");
+        ourNames.add("Nazmul");
+        ourNames.add("Mustafa");
+        ourNames.add("Nate");
+        ourNames.add("Benjamin");
+        ourNames.add("Dan");
+        ourNames.add("Indra");
+        ourNames.add("James");
+        ourNames.printAllValues();
 
     }
 

@@ -32,7 +32,7 @@ public class RangeAndMatrix {
         System.out.println("Getting the range");
         Set<Double> matchingNumbers = lotteryNumbers.subSet(0.1D, 0.13D);
         System.out.println("matching lottery numbers: " + matchingNumbers.size());
-        
+
     }
 
 }
