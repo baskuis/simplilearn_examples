@@ -12,6 +12,7 @@ import concurrency.Tortoise;
 import dundermifflin.PaperCompany;
 import excersizes.ArrayRotation;
 import excersizes.OrderStatistics;
+import excersizes.RangeAndMatrix;
 import fruits.Kiwi;
 import videogames.HalfLife;
 import videogames.SciFi;
@@ -31,7 +32,7 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        OrderStatistics.meanMedianAge();
+        RangeAndMatrix.rangeMatrix();
 
     }
 

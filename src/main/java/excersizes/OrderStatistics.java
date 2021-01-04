@@ -53,7 +53,7 @@ public class OrderStatistics {
             int biggerAge = ages.get(smallerIndex + 1);
             medianAge = (smallerAge + biggerAge) / 2f;
         }
-        
+
         System.out.println("Mean age " + meanAge);
         System.out.println("Median age " + medianAge);
 
