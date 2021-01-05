@@ -21,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +31,52 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        final Queue<String> lineAtCarwash = new ArrayBlockingQueue<>(200);
+
+        /** Carwash manager watching line */
+        new Thread(() -> {
+           while(true) {
+               System.out.println("Line is " + lineAtCarwash.size() + " long");
+               if (lineAtCarwash.size() > 20) {
+                   System.out.println("hurry up");
+               }
+               try {
+                   Thread.sleep(3000l);
+               } catch (InterruptedException e) { }
+           }
+        }).start();
+
+        /** Cars arriving at the carwash */
+        new Thread(() -> {
+            while(true) {
+                lineAtCarwash.add("Dodge Ram");
+                lineAtCarwash.add("Nissan");
+                lineAtCarwash.add("Charger");
+                lineAtCarwash.add("Chevy Camero");
+                lineAtCarwash.add("Honda Civic");
+                lineAtCarwash.add("Buggy");
+                lineAtCarwash.add("Jeep");
+                try {
+                    Thread.sleep(3000l);
+                } catch (InterruptedException e) { }
+            }
+        }).start();
+
+        /** Carwash washing cars */
+        new Thread(() -> {
+            while (true) {
+                if (Math.random() > 0.5) {
+                    System.out.println("Tom is washing : " + lineAtCarwash.poll());
+                } else {
+                    System.out.println("Suzy is washing: " + lineAtCarwash.poll());
+                    System.out.println("Sally is washing: " + lineAtCarwash.poll());
+                    System.out.println("Barry is washing: " + lineAtCarwash.poll());
+                }
+                try {
+                    Thread.sleep(1000l);
+                } catch (InterruptedException e) { }
+            }
+        }).start();
 
     }
 
