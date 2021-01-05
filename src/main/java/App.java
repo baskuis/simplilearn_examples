@@ -30,17 +30,35 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        OurCircularLinkedList<String> playList = new OurCircularLinkedList<>();
-        playList.add("Fly me to the moon");
-        playList.add("Take Five");
-        playList.add("Boys of Summer");
-        playList.add("Dirty Laundry");
-        playList.add("wonderful life");
-        playList.add("Hells Bells");
-        playList.add("Reptilia");
-        playList.add("Living on a Prayer");
-        playList.printSomeEntries(1000);
 
+
+    }
+
+    public static void ourCircularLinkedListExample() {
+        //        OurCircularLinkedList<String> playList = new OurCircularLinkedList<>();
+//        playList.add("Fly me to the moon");
+//        playList.add("Take Five");
+//        playList.add("Boys of Summer");
+//        playList.add("Dirty Laundry");
+//        playList.add("wonderful life");
+//        playList.add("Hells Bells");
+//        playList.add("Reptilia");
+//        playList.add("Living on a Prayer");
+//        playList.printSomeEntries(1000);
+
+        OurSinglyLinkedList<String> ourNames = new OurSinglyLinkedList<>();
+        ourNames.add("Narges");
+        ourNames.add("Nazmul");
+        ourNames.add("Mustafa");
+        ourNames.add("Nate");
+        ourNames.add("Benjamin");
+        ourNames.add("Dan");
+        ourNames.add("Indra");
+        ourNames.add("James");
+        ourNames.printAllValues();
+
+        OurCircularLinkedList<String> ourCircularNames = new OurCircularLinkedList<>(ourNames);
+        ourCircularNames.printSomeEntries(300);
     }
 
     public static void ourSinglyLinkedListExample() {

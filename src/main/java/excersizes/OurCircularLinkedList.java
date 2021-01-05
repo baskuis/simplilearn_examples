@@ -14,6 +14,18 @@ public class OurCircularLinkedList<T> {
         Node<T> next;
     }
 
+    public OurCircularLinkedList() {
+
+    }
+
+    public OurCircularLinkedList(OurSinglyLinkedList<T> list) {
+        OurSinglyLinkedList.Node<T> current = list.head;
+        while (current != null) {
+            add(current.element);
+            current = current.next;
+        }
+    }
+
     public void add(T element) {
         Node<T> newNode = new Node<>();
         newNode.element = element;
