@@ -10,10 +10,7 @@ import concurrency.Hare;
 import concurrency.Race;
 import concurrency.Tortoise;
 import dundermifflin.PaperCompany;
-import excersizes.ArrayRotation;
-import excersizes.OrderStatistics;
-import excersizes.OurSinglyLinkedList;
-import excersizes.RangeAndMatrix;
+import excersizes.*;
 import fruits.Kiwi;
 import videogames.HalfLife;
 import videogames.SciFi;
@@ -33,6 +30,20 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        OurCircularLinkedList<String> playList = new OurCircularLinkedList<>();
+        playList.add("Fly me to the moon");
+        playList.add("Take Five");
+        playList.add("Boys of Summer");
+        playList.add("Dirty Laundry");
+        playList.add("wonderful life");
+        playList.add("Hells Bells");
+        playList.add("Reptilia");
+        playList.add("Living on a Prayer");
+        playList.printSomeEntries(1000);
+
+    }
+
+    public static void ourSinglyLinkedListExample() {
         OurSinglyLinkedList<String> ourNames = new OurSinglyLinkedList<>();
         ourNames.add("Narges");
         ourNames.add("Nazmul");
@@ -43,7 +54,6 @@ public class App {
         ourNames.add("Indra");
         ourNames.add("James");
         ourNames.printAllValues();
-
     }
 
     public static void readFromFileDunderMifflin() throws IOException {
