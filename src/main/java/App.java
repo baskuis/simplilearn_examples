@@ -33,6 +33,57 @@ public class App {
 
     }
 
+    public static void stackExample() {
+        /** FILO */
+//        Stack<String> favoriteClothes = new Stack<>();
+//        favoriteClothes.push("jeans");
+//        favoriteClothes.push("hoodie");
+//        favoriteClothes.push("cap");
+//        favoriteClothes.push("cap");
+//        favoriteClothes.push("cap");
+//        favoriteClothes.push("cap");
+//        while(!favoriteClothes.empty()) {
+//            System.out.println(favoriteClothes.pop());
+//        }
+
+        String[] words = {
+                "banana",
+                "lion",
+                "liger",
+                "giraffe",
+                "elephant",
+                "dog",
+                "fish",
+                "tiger",
+        };
+
+        Stack<String> stack = new Stack<>();
+        for (int i = 0; i < words.length; i++) {
+            String word = words[i];
+            if (!stack.empty()) {
+                String previous = stack.peek();
+                if (previous.length() < word.length()) {
+                    stack.push(word);
+                } else {
+                    printItemsInStack(stack);
+                    stack.removeAllElements();
+                    stack.push(word);
+                }
+            } else {
+                stack.push(word);
+            }
+        }
+
+        printItemsInStack(stack);
+    }
+
+    private static void printItemsInStack(Stack<String> stack) {
+        System.out.println("==========");
+        for (Object entry: stack.toArray()) {
+            System.out.println(entry);
+        }
+    }
+
     public static void doublyLinkedListExample() {
         OurDoublyLinkedList<String> list = new OurDoublyLinkedList<>();
         list.add("Narges");
