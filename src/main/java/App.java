@@ -31,7 +31,19 @@ public class App {
     public static void main(String[] args) throws IOException {
 
 
+    }
 
+    public static void doublyLinkedListExample() {
+        OurDoublyLinkedList<String> list = new OurDoublyLinkedList<>();
+        list.add("Narges");
+        list.add("Nazmul");
+        list.add("Mustafa");
+        list.add("Nate");
+        list.add("Benjamin");
+        list.add("Dan");
+        list.add("Indra");
+        list.add("James");
+        list.printAllValues();
     }
 
     public static void ourCircularLinkedListExample() {
