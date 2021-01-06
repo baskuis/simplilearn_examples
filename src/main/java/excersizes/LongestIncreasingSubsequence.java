@@ -63,7 +63,6 @@ public class LongestIncreasingSubsequence {
 
                 // Starting over so we clear out stack
                 // Start the next sequence
-                entries.removeAllElements();
                 entries.push(entry);
 
             }
