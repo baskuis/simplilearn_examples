@@ -33,6 +33,47 @@ public class App {
 
     }
 
+    static void selectionSort() {
+
+        //Selection sort
+        int[] numbers = {4,2,4,6,7,8,1,4,6,8,4,2,4,6,7,8,1,4,6,8,4,2,4,6,7,8,1,4,6,8,4,2,4,6,7,8,1,4,6,8,4,2,4,6,7,8,1,4,6,8,4,2,4,6,7,8,1,4,6,8,4,2,4,6,7,8,1,4,6,8,4,2,4,6,7,8,1,4,6,8};
+
+        int evaluations = 0;
+
+        // Put the number in incrementing order
+        // Loop through our numbers
+        for (int i = 0; i < numbers.length ; i++) {
+
+            // This is one of those numbers
+            int outer = numbers[i];
+
+            // Lets find if we can go lower?
+            int lowest = outer;
+            int key = i;
+            for (int k = i + 1; k < numbers.length; k++) {
+                evaluations++;
+                int inner = numbers[k];
+                if (inner < lowest) {
+                    lowest = inner;
+                    key = k;
+                }
+            }
+
+            // Swap them out
+            numbers[i] = lowest;
+            numbers[key] = outer;
+
+        }
+
+        for(int i: numbers) {
+            System.out.println("Number: " + i);
+        }
+
+        System.out.println("We performed " + evaluations + " evaluations");
+
+
+    }
+
     static void searchProblems() {
         int[] numbers = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23};
         int lookingFor = 10;
