@@ -31,6 +31,44 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        int[] numbers = {1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23};
+        int lookingFor = 10;
+
+        System.out.println("Linear search");
+        //Linear search
+        //O(n)
+        for (int number: numbers) {
+            System.out.println("--------");
+            if (number == lookingFor) {
+                System.out.println("Found " + number);
+            }
+        }
+
+        //Binary search
+        //O(log n)
+        System.out.println("Binary search");
+        int index = binarySearch(lookingFor, 0, numbers.length, numbers);
+        System.out.println("Found answer at index: " + index);
+
+    }
+
+    static int binarySearch(int lookingFor, int start, int end, int[]data) {
+        System.out.println("--------");
+        int evaluateIndex = (end + start) / 2;
+        if (data[evaluateIndex] == lookingFor) {
+            System.out.println("found " + lookingFor + " at index " + evaluateIndex);
+            return evaluateIndex;
+        }
+        if (data[evaluateIndex] > lookingFor) {
+            return binarySearch(lookingFor, start, evaluateIndex, data);
+        } else {
+            return binarySearch(lookingFor, evaluateIndex, end, data);
+        }
+    }
+
+
+
+    public static void longestSubSequence() {
         LongestIncreasingSubsequence longestIncreasingSubsequence = new LongestIncreasingSubsequence();
 
         Integer[] result = longestIncreasingSubsequence.getLongestIncreasingSubsequence();
@@ -40,9 +78,6 @@ public class App {
             System.out.println("number: " + i);
         }
         System.out.println("End of sequence");
-
-
-
     }
 
     public static void lineAtCarWashQueueExample() {
