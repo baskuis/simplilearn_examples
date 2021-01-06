@@ -50,6 +50,28 @@ public class App {
         int index = binarySearch(lookingFor, 0, numbers.length, numbers);
         System.out.println("Found answer at index: " + index);
 
+        //Exponential search
+        //O(log n)
+        System.out.println("Exponential search");
+        index = exponentialSearch(lookingFor, numbers);
+        System.out.println("Found answer at index: " + index);
+
+    }
+
+    static int exponentialSearch(int lookingFor, int[]data) {
+        System.out.println("--------");
+        if (data[0] == lookingFor) {
+            return 0;
+        }
+        int range = 2;
+        int index = 1;
+        int previousIndex = 0;
+        while (data[index] < lookingFor) {
+            previousIndex = index;
+            index += range;
+            range = range * 2;
+        }
+        return binarySearch(lookingFor, previousIndex, index, data);
     }
 
     static int binarySearch(int lookingFor, int start, int end, int[]data) {
