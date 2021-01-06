@@ -31,19 +31,34 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        LongestIncreasingSubsequence longestIncreasingSubsequence = new LongestIncreasingSubsequence();
+
+        Integer[] result = longestIncreasingSubsequence.getLongestIncreasingSubsequence();
+
+        System.out.println("Winning sequence is");
+        for (Integer i : result) {
+            System.out.println("number: " + i);
+        }
+        System.out.println("End of sequence");
+
+
+
+    }
+
+    public static void lineAtCarWashQueueExample() {
         final Queue<String> lineAtCarwash = new ArrayBlockingQueue<>(200);
 
         /** Carwash manager watching line */
         new Thread(() -> {
-           while(true) {
-               System.out.println("Line is " + lineAtCarwash.size() + " long");
-               if (lineAtCarwash.size() > 20) {
-                   System.out.println("hurry up");
-               }
-               try {
-                   Thread.sleep(3000l);
-               } catch (InterruptedException e) { }
-           }
+            while(true) {
+                System.out.println("Line is " + lineAtCarwash.size() + " long");
+                if (lineAtCarwash.size() > 20) {
+                    System.out.println("hurry up");
+                }
+                try {
+                    Thread.sleep(3000l);
+                } catch (InterruptedException e) { }
+            }
         }).start();
 
         /** Cars arriving at the carwash */
@@ -77,7 +92,6 @@ public class App {
                 } catch (InterruptedException e) { }
             }
         }).start();
-
     }
 
     public static void stackExample() {
