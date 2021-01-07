@@ -31,6 +31,64 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        // merge sort
+        int[] numbers = { 12, 11, 13, 5, 6, 7 };
+
+        mergeSort(numbers, 0, numbers.length - 1);
+
+        for(int n : numbers) {
+            System.out.println("n: " + n);
+        }
+
+    }
+
+    static void mergeSort(int[] data, int left_index, int right_index) {
+        if (left_index >= right_index) {
+            return;
+        }
+        int middle_index = (left_index + right_index) / 2;
+        mergeSort(data, left_index, middle_index);
+        mergeSort(data, middle_index + 1, right_index);
+        merge(data, left_index, middle_index, right_index);
+    }
+
+    static void merge(int[] data, int left_index, int middle_index, int right_index) {
+        int left_size = middle_index - left_index + 1;
+        int right_size = right_index - middle_index;
+        int[] leftData = new int[left_size];
+        int[] rightData = new int[right_size];
+        for (int i = 0; i < left_size; i++) {
+            leftData[i] = data[left_index + i];
+        }
+        for (int i = 0; i < right_size; i++) {
+            rightData[i] = data[middle_index + 1 + i];
+        }
+        int indexOfLeftData = 0;
+        int indexOfRightData = 0;
+        int startingIndex = left_index;
+        while(
+              indexOfLeftData < left_size &&
+              indexOfRightData < right_size
+        ) {
+            if (leftData[indexOfLeftData] <= rightData[indexOfRightData]) {
+                data[startingIndex] = leftData[indexOfLeftData];
+                indexOfLeftData++;
+            } else {
+                data[startingIndex] = rightData[indexOfRightData];
+                indexOfRightData++;
+            }
+            startingIndex++;
+        }
+        while (left_index < left_size) {
+            data[startingIndex] = leftData[left_index];
+            left_index++;
+            startingIndex++;
+        }
+        while (right_index < right_size) {
+            data[startingIndex] = rightData[right_index];
+            right_index++;
+            startingIndex++;
+        }
     }
 
     static void insertionSort() {
@@ -81,7 +139,7 @@ public class App {
             System.out.println("n: " + n);
         }
         System.out.println("performed evaluations: " + evaluations);
-        
+
     }
 
     static void bubbleSort() {
