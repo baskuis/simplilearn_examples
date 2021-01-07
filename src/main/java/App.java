@@ -31,6 +31,61 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+    }
+
+    static void insertionSort() {
+
+        // insertion sort
+        int[] numbers = {11, 19, 18, 5, 16, 15, 14, 13, 12, 20, 10, 9, 8, 7, 6, 17, 4, 3, 2, 1};
+
+        /*
+         *                      PASS
+         * 2, 3, 3, 1, 7, 8, 1   |
+         * |                     |
+         *    |  |  |            |
+         * 1, 2, 3, 3, 7, 8, 1   |
+         *          |            |
+         *             |  |  |   |
+         * 1, 2, 3, 1, 3, 7, 8   |
+         * |
+         *    |  |  |
+         * 1, 1, 2, 3, 3, 7, 8
+         * -----------------------
+         */
+        int evaluations = 0;
+
+        while (true) {
+            boolean inOrder = true;
+            int seriesLength = 1;
+            for (int i = 0; i < numbers.length - 1; i += seriesLength) {
+                seriesLength = 0;
+                for (int r = i + 1; r < numbers.length; r++) {
+                    evaluations++;
+                    seriesLength++;
+                    int right = numbers[r];
+                    if (right < numbers[r - 1]) {
+                        for (int a = r; a > i; a--) {
+                            numbers[a] = numbers[a - 1];
+                        }
+                        numbers[i] = right;
+                        inOrder = false;
+                    }
+                }
+            }
+            if (inOrder) {
+                break;
+            }
+        }
+
+        for (int n: numbers) {
+            System.out.println("n: " + n);
+        }
+        System.out.println("performed evaluations: " + evaluations);
+        
+    }
+
+    static void bubbleSort() {
+
         int[] numbers = {1, 3, 2, 1, 3, 3, 4, 7, 8, 9};
 
         while (true) {
