@@ -25,9 +25,56 @@ import java.util.stream.Collectors;
 
 public class App {
 
-    public static void main(String[] args) throws IOException {
-        
+    static int counter = 0;
 
+    public static void main(String[] args) throws IOException {
+
+
+    }
+
+    static void quickSortExample() {
+
+        // O(n*log(n))
+
+        // quick sort
+        int[] numbers = { 8, 2, 4, 1, 99, 23, 12, 11, 13, 5, 6, 7, 3, 2, 1, 5, 7, 8, 9, 1 };
+
+        // pivot point: last element
+        quickSort(numbers, 0, numbers.length - 1);
+
+        for(int n : numbers) {
+            System.out.println("n: " + n);
+        }
+
+        System.out.println("evaluations: " + counter);
+
+    }
+
+    static void quickSort(int[] data, int start, int end) {
+        if (start < end) {
+            int pivot_index = partition(data, start, end);
+            quickSort(data, start, pivot_index - 1);
+            quickSort(data, pivot_index + 1, end);
+        }
+    }
+
+    static int partition(int[] data, int start, int end) {
+        int pivotValue = data[end];
+        int small_index = start - 1;
+        for (int currentIndex = start; currentIndex < end; currentIndex++) {
+            counter++;
+            if (data[currentIndex] < pivotValue) {
+                small_index++;
+                int temp = data[small_index];
+                data[small_index] = data[currentIndex];
+                data[currentIndex] = temp;
+            }
+        }
+
+        int temp_a = data[small_index + 1];
+        data[small_index + 1] = data[end];
+        data[end] = temp_a;
+        return small_index + 1;
     }
 
     static void definitelyWorkingMergeSort() {
