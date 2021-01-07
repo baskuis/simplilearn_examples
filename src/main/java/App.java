@@ -13,13 +13,9 @@ import dundermifflin.PaperCompany;
 import excersizes.*;
 import fruits.Kiwi;
 import videogames.HalfLife;
-import videogames.SciFi;
 import videogames.SuperMario;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -30,7 +26,11 @@ import java.util.stream.Collectors;
 public class App {
 
     public static void main(String[] args) throws IOException {
+        
 
+    }
+
+    static void definitelyWorkingMergeSort() {
         // merge sort
         int[] numbers = { 12, 11, 13, 5, 6, 7 };
 
@@ -39,7 +39,6 @@ public class App {
         for(int n : numbers) {
             System.out.println("n: " + n);
         }
-
     }
 
     static void mergeSort(int[] data, int left_index, int right_index) {
@@ -79,14 +78,14 @@ public class App {
             }
             startingIndex++;
         }
-        while (left_index < left_size) {
-            data[startingIndex] = leftData[left_index];
-            left_index++;
+        while (indexOfLeftData < left_size) {
+            data[startingIndex] = leftData[indexOfLeftData];
+            indexOfLeftData++;
             startingIndex++;
         }
-        while (right_index < right_size) {
-            data[startingIndex] = rightData[right_index];
-            right_index++;
+        while (indexOfRightData < right_size) {
+            data[startingIndex] = rightData[indexOfRightData];
+            indexOfRightData++;
             startingIndex++;
         }
     }
