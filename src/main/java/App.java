@@ -31,6 +31,38 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        int[] numbers = {1, 3, 2, 1, 3, 3, 4, 7, 8, 9};
+
+        while (true) {
+
+            // assume it's in order
+            boolean inOrder = true;
+
+            // let's check if that is true
+            for (int i = 0; i < numbers.length - 1; i++) {
+
+                int left = numbers[i];
+                int right = numbers[i + 1];
+
+                // hey these are not in order
+                if (right < left) {
+                    numbers[i] = right;
+                    numbers[i + 1] = left;
+
+                    // so we'll need to check again
+                    inOrder = false;
+                }
+
+            }
+            if (inOrder) {
+                break;
+            }
+        }
+
+        for (int n: numbers) {
+            System.out.println("n: " + n);
+        }
+
     }
 
     static void selectionSort() {
