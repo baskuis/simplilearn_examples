@@ -6,6 +6,269 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Graph 
+
+    *     (*)---*
+    |    /      |
+   [*]--*       *
+   / \ /	
+  *   *
+  |   |
+      *
+
+----------------------------
+
+List
+*-*-*-*
+
+----------------------------
+
+Tree
+*-*-*-*
+  \*-*---*
+      \*
+
+----------------------------
+
+Binary Tree
+
+           *
+          / \
+         *   *
+        / \ / \
+
+
+
+
+
+
+
+
+
+insertion sort
+O(n^2)/2
+
+----------------------------
+                     PASS
+2, 3, 3, 1, 7, 8, 1   |
+|                     | 
+   |  |  |            |
+1, 2, 3, 3, 7, 8, 1   |
+         |            |
+            |  |  |   |
+1, 2, 3, 1, 3, 7, 8   |
+|
+   |  |  |
+1, 1, 2, 3, 3, 7, 8  
+-----------------------
+
+- do multiple rounds until done (not moving anything else)
+
+
+
+
+selection sort
+
+1, 3, 3, 1, 7, 8, 9
+|
+   |  |  |  |  |  |
+
+- compare with rest of list and swap
+- move on to the next
+
+O(n^2)/2
+
+--------------------
+
+bubble sort
+
+1, 3, 3, 1, 7, 8, 9
+|
+   |
+
+O(n^2)
+
+- compare and swap
+- move on to the next
+- do multiple rounds until done (not moving anything else)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create newNode;
+
+	newNode >>> adress[99998] (first one)
+	newNode2 >>> adress[12334] (second one)
+	newNode3 >>> adress[23233] (second one)
+	
+
+/** only for the first - special case */
+if (this.head == null) {
+    this.tail = this.head = newNode;
+    return;
+}
+
+	this.tail >>> address[99998] 
+	this.head >>> address[99998]
+	newNode >>> adress[99998]
+
+
+
+/** attaching new node */
+this.tail.next = newNode2;
+
+adress[99998].next >>> adress[12334]
+
+
+/** now that done - the brand new one is the last */
+this.tail = newNode2;
+
+this.tail >>> address[12334]
+
+address[12334].next >>> address[23233]
+
+this.tail >>> address[23233]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Singly Linked List
+
+-------------------
+
+head -> First Node
+
+Node -> next Node
+Node -> next Node
+Node -> next Node
+Node -> next Node
+
+tail -> Last Node
+
+
+Real world example: 
+Track the names of people on the call
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Java
+order statistics 
+
+
+mean/average age = sum(all) / size
+median age = order everybody by age - take the middle person
+
+
+23
+32
+42
+21
+54
+21
+24
+33
+
+get the mean age
+get the median age
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Real life examples of array rotation:
 
 CircuitBreaker 
