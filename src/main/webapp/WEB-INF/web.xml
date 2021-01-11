@@ -1,11 +1,11 @@
 <web-app>
     <display-name>Widget Store</display-name>
     <servlet>
-        <servlet-name>hello-world</servlet-name>
-        <servlet-class>web.HelloWorldServlet</servlet-class>
+        <servlet-name>desserts-servlet</servlet-name>
+        <servlet-class>widgetstore.web.ShowProductsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>hello-world</servlet-name>
-        <url-pattern>/hello</url-pattern>
+        <servlet-name>desserts-servlet</servlet-name>
+        <url-pattern>/desserts</url-pattern>
     </servlet-mapping>
 </web-app>
