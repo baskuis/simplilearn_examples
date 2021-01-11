@@ -1,3 +1,59 @@
+Maven Web Application
+
+Maven (build tool)
+	 - The pom.xml tell maven what to do (ie: how to build the project) 
+	 - It can build java projects
+	 - It can create jar files
+	 - It can create war file 
+	 	- Difference between jar/war?
+		 	- jar file - java application
+		 	- war file - web application
+		 	
+What does a war file have that jar file doesn't have?
+	- java/class files - our code
+	- web.xml		 	
+		- path routing etc 
+		- shows where servlets are 
+			- class in java ee - exposes application to network
+	- static web content
+		- html
+		- js
+		- css
+		- images
+
+Do still need web server.
+	- Our java application application needs a home - that knows how to expose it on the network
+	- apache 
+	- nginx
+	- others
+	
+	- In the case of java projects - the popular webserver??
+		- apache tomcat.
+
+
+
+- Tell maven to create war file
+- Add in servlet dependency
+- Add a hello world servlet
+- Add web.xml - configure to use hello world servlet
+- Add method to test war file with tomcat?
+- Run war with tomcat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 DAO
