@@ -1,0 +1,11 @@
+<web-app>
+    <display-name>Widget Store</display-name>
+    <servlet>
+        <servlet-name>create-product</servlet-name>
+        <servlet-class>widgetstore.web.CreateProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>create-product</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+</web-app>
