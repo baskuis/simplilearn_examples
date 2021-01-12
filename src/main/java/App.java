@@ -22,6 +22,9 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -30,8 +33,54 @@ public class App {
 
     static int counter = 0;
 
-    public static void main(String[] args) throws IOException {
-        functionalInterfaceExample();
+    public static void main (String[] args) {
+
+        String game = "hide and go seek";
+
+        Consumer<String> play = (g) -> {
+            System.out.println("Starting the game " + g);
+            try { Thread.sleep(500); } catch (InterruptedException e) { }
+            System.out.println("Game is over");
+        };
+
+        play.accept(game);
+
+        play.accept("soccer");
+
+        BiFunction<Integer, String, String> showAge =
+                (age, name) -> name + " is " + age + " years old";
+
+        System.out.println(showAge.apply(33, "Mellisa"));
+        System.out.println(showAge.apply(38, "Bob"));
+
+        TriFunction<Integer, Integer, String, String> showAgeAndHeight =
+                (age, height, name) -> name + " is " + age + " years old and is " + height + "ft tall";
+
+        System.out.println(showAgeAndHeight.apply(33, 6,"Mellisa"));
+        System.out.println(showAgeAndHeight.apply(23, 5,"Suzy"));
+        System.out.println(showAgeAndHeight.apply(43, 7,"Sally"));
+
+    }
+
+    @FunctionalInterface
+    interface TriFunction<T, U, P, R> {
+        R apply(T t, U u, P p);
+    }
+
+    public static void predicateExample() {
+        List<String> nameList=Arrays.asList("Sachin", "Samuels");
+        System.out.println("Printing all the names starting with S");
+        checkString(nameList, (name->name.startsWith("S")));
+        System.out.println("Printing all the names ending with s");
+        checkString(nameList, (name->name.endsWith("s")));
+    }
+
+    public static void checkString(List<String> nameList, Predicate<String> p){
+        for (String name: nameList) {
+            if (p.test(name)) {
+                System.out.println(name);
+            }
+        }
     }
 
 
