@@ -25,6 +25,9 @@ class DessertDAOImplTest {
         assertNotNull(desserts);
         assertTrue(desserts.size() > 0);
 
+        Runnable hi = () -> {
+            System.out.println("I can eat deserts");
+        };
     }
 
     @Test

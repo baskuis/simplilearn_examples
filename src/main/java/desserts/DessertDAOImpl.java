@@ -2,6 +2,7 @@ package desserts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DessertDAOImpl implements GenericDAO<DessertDTO> {
 
@@ -19,6 +20,26 @@ public class DessertDAOImpl implements GenericDAO<DessertDTO> {
     @Override
     public List<DessertDTO> getDesserts() {
         return desserts;
+    }
+
+    public static interface GetGood {
+        boolean good(DessertDTO dessertDTO);
+    }
+
+    public static interface Convert<I,O> {
+        O execute(I in);
+    }
+
+    public List<String> sortedByName() {
+
+        Convert<DessertDTO, String> out = (DessertDTO dessertDTO) -> {
+            return dessertDTO.name;
+        };
+
+        return desserts.stream()
+                .sorted(DessertDTO::compareByName)
+                .map(dessertDTO -> dessertDTO.name)
+                .collect(Collectors.toList());
     }
 
     @Override

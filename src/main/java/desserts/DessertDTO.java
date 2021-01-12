@@ -26,6 +26,10 @@ public class DessertDTO {
         this.good = good;
     }
 
+    public static int compareByName(DessertDTO a, DessertDTO b) {
+        return a.name.compareTo(b.name);
+    }
+
     @Override
     public String toString() {
         return "DessertDTO{" +

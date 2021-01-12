@@ -32,6 +32,14 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
+        HalfLife halfLife = new HalfLife();
+        halfLife.showNumberOfWeapons();
+        SuperMario superMario = new SuperMario();
+
+    }
+
+    static void daoExample() {
+
         GenericDAO<DessertDTO> dessertDAO = new DessertDAOImpl();
         List<DessertDTO> desserts = dessertDAO.getDesserts();
 
@@ -47,9 +55,6 @@ public class App {
         for (DessertDTO dessert : desserts) {
             System.out.println(dessert);
         }
-
-
-
 
     }
 

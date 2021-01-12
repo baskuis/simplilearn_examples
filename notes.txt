@@ -1,3 +1,167 @@
+
+
+ClassA extends ClassB
+
+ClassB extends AbstractClassC
+
+ClassC extends ClassA, ClassB ? 
+	- Older construct 
+	- not allowed
+	- diamond problem 
+		- ClassC would know which method to call in case of a conflict
+		- Methods have implementations in classes / they have bodies
+
+InterfaceA extends InterfaceB, InterfaceC ? 
+	- Newer construct 
+	- is allowed
+	- no diamond problem
+		- If Class D implements InterfaceA it would have to provide a 
+		  single methods implementation for conflicting requirements
+		  from interfaces	
+
+		  	SomeClassA
+		  	/		\
+		   /		 \
+	InterfaceB     InterfaceC
+		   \		 /
+		    \	    /
+			InterfaceD
+			
+	- Defaults methods
+		- Where can we add them? Interfaces
+		- They are really just like other methods
+			- with implementations 
+	- Why not a diamond problem? Why is that? It is not consistent?
+		- Should we use it? - yes, but don't go overboard
+		- People that make java made a mistake? - kind of .. 
+		- Java needed to be more flexible - and also backwards compatible
+			- Default methods were introduced to make java more flexible - and keep backwards compatibility 
+
+
+
+
+
+
+
+Method:
+void someName() {
+	
+}
+	- needs to be in class
+
+Lambda Expression:
+() -> {
+	
+}
+	 - it's a method 
+	 - standalone 
+	 - nameless
+	 - but can be assigned to variable
+	 - provides flexibility
+	 - Since Java 8
+
+
+
+Javascript example:
+-----------
+() => {
+	
+}
+-----------
+function hello() {
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dependency a 
+	- dependency d (version > 2)
+dependency b 
+	- dependency c
+		- dependency d (version = 1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Apache Tomcat - Java application (web server)
+	-> war file (our code + web stuff)
+
+----------------------------------------------
+	
+JVM - will run tomcat + our stuff
+	-> scope = provided
+	-> these files are also in tomcat already
+
+----------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Maven Web Application
 
 Maven (build tool)
@@ -37,7 +201,7 @@ Do still need web server.
 - Add a hello world servlet
 - Add web.xml - configure to use hello world servlet
 - Add method to test war file with tomcat?
-- Run war with tomcat
+	- Run war with tomcat
 
 
 
