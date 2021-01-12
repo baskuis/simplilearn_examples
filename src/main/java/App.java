@@ -32,9 +32,33 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        HalfLife halfLife = new HalfLife();
-        halfLife.showNumberOfWeapons();
-        SuperMario superMario = new SuperMario();
+    }
+
+
+    @FunctionalInterface
+    interface MyFunInterface {
+        String makeOfficial(String name); // abstract // does not have body
+        default void giveMeTheFancyFormat(String name) {
+            System.out.println("------");
+            System.out.println(makeOfficial(name));
+            System.out.println("------");
+        }
+        default String getMeItWrapped(String name) {
+            return "(" + makeOfficial(name) + ")";
+        }
+    }
+
+    static void functionalInterfaceExample() {
+
+        // functional interface + lambda
+        MyFunInterface printItNice = (anyName) -> "The distinquished " + anyName;
+        System.out.println(
+                printItNice.makeOfficial("Jon")
+        );
+        printItNice.giveMeTheFancyFormat("Indra");
+        System.out.println(
+                printItNice.getMeItWrapped("Nazmul")
+        );
 
     }
 
