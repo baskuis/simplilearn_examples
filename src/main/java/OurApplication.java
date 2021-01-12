@@ -29,12 +29,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class App {
+public class OurApplication {
 
     static int counter = 0;
 
-    public static void main (String[] args) {
+    static public void main (String[] args) {
 
+        List<String> words = Arrays.asList("HI", "how", "are", "you");
+
+        words.stream()
+                .filter((word) -> word.length() > 2) //Predicate
+                .map((word) -> word + " is great") //Function
+                .forEach(OurApplication.PrintUtils::printIt); //Consumer
+
+    }
+
+    public static class PrintUtils {
+        public static void printIt(String it) {
+            System.out.println("It is: " + it);
+        }
+    }
+
+    public static void functionalIntefacesExample() {
         String game = "hide and go seek";
 
         Consumer<String> play = (g) -> {
@@ -59,7 +75,6 @@ public class App {
         System.out.println(showAgeAndHeight.apply(33, 6,"Mellisa"));
         System.out.println(showAgeAndHeight.apply(23, 5,"Suzy"));
         System.out.println(showAgeAndHeight.apply(43, 7,"Sally"));
-
     }
 
     @FunctionalInterface
