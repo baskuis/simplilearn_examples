@@ -31,35 +31,37 @@ public class App {
     static int counter = 0;
 
     public static void main(String[] args) throws IOException {
-
+        functionalInterfaceExample();
     }
 
 
     @FunctionalInterface
     interface MyFunInterface {
         String makeOfficial(String name); // abstract // does not have body
-        default void giveMeTheFancyFormat(String name) {
-            System.out.println("------");
-            System.out.println(makeOfficial(name));
-            System.out.println("------");
-        }
-        default String getMeItWrapped(String name) {
-            return "(" + makeOfficial(name) + ")";
-        }
     }
 
     static void functionalInterfaceExample() {
 
         // functional interface + lambda
         MyFunInterface printItNice = (anyName) -> "The distinquished " + anyName;
-        System.out.println(
-                printItNice.makeOfficial("Jon")
-        );
-        printItNice.giveMeTheFancyFormat("Indra");
-        System.out.println(
-                printItNice.getMeItWrapped("Nazmul")
+        System.out.println(printItNice.makeOfficial("Bishnu"));
+        System.out.println(printItNice.makeOfficial("Chris"));
+        System.out.println(printItNice.makeOfficial("Jon"));
+
+        MyFunInterface printItGoofy = (anyName) -> "The silly " + anyName;
+        System.out.println(printItGoofy.makeOfficial("Bas"));
+
+        printThemAll(
+                new String[]{"suzy", "sally", "sam"},
+                (name) -> "The funny " + name
         );
 
+    }
+
+    static void printThemAll(String[] names, MyFunInterface howToDoIt) {
+        for (String name: names) {
+            System.out.println(howToDoIt.makeOfficial(name));
+        }
     }
 
     static void daoExample() {
