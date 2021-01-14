@@ -7,34 +7,28 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class NeedPermissionFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
-            Cookie cookie = null;
-            try {
-                if (((HttpServletRequest) request).getCookies() != null) {
-                    cookie = Arrays.stream(
-                            ((HttpServletRequest) request).getCookies()
-                    ).filter((Cookie c) -> c.getName().equals("userid"))
-                            .findFirst().get();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Cookie not found");
-            }
-            if (cookie != null) {
-                System.out.println("Ok to continue");
+            /**
+             * Checking the session for a userid -
+             * to see if the valid password was provided
+             **/
+            Object userId = ((HttpServletRequest) request)
+                    .getSession().getAttribute("userid");
+            if (userId != null) {
+                System.out.println("Valid login, continuing");
                 chain.doFilter(request, response);
             } else {
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
-                System.out.println("Redirecting to login");
+                System.out.println("Redirecting to login, not logged in");
                 httpResponse.sendRedirect("login");
             }
         }
-
     }
 
 }

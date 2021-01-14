@@ -16,6 +16,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.println("<form action='' method='POST'>");
         out.println("<label>Enter userid: <input type='text' name='userid'></input></label>");
+        out.println("<label>Enter password: <input type='password' name='password'></input></label>");
         out.println("<input type='submit'>Sign In</input>");
         out.println("</form>");
     }
@@ -23,8 +24,14 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userid");
-        if (userId != null) {
-            resp.addCookie(new Cookie("userid", userId));
+        String password = req.getParameter("password");
+        if (userId != null && password.equals("letmein")) {
+
+            /** This is what makes it a "valid" login */
+            req.getSession().setAttribute(
+                    "userid", userId
+            );
+
             resp.sendRedirect("desserts");
         }
         this.doGet(req, resp);
