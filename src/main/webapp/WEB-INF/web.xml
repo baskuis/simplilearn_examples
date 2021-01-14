@@ -4,9 +4,17 @@
         <servlet-name>desserts-servlet</servlet-name>
         <servlet-class>widgetstore.web.ShowProductsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>vanilla</servlet-name>
+        <servlet-class>web.MyGenericServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>desserts-servlet</servlet-name>
         <url-pattern>/desserts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>vanilla</servlet-name>
+        <url-pattern>/vanilla</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>logging-filter</filter-name>

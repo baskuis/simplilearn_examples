@@ -1,3 +1,43 @@
+
+
+
+Windows - operating system
+Docker - application container
+---------- JVM ----------
+Tomcat - application
+War file - our code / our logic
+---------- Traditional way of packaging ----------
+Tomcat is a java application (we're not building this)
+ -> our war file is part of it (building this though)
+ -> web.xml - shows tomcat how to integrate our code
+
+
+
+
+---------- Modern way of packaging ----------
+Our code ie: spring-web
+ -> dependency 
+ 	-> tomcat server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Adding a dessert:
  >> curl -X POST 'http://localhost:8081/widgets/desserts' --data 'dessert-name=Tira+Misu+2' --compressed -vi
 
