@@ -1,6 +1,7 @@
 package web;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +24,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userid");
         if (userId != null) {
+            resp.addCookie(new Cookie("userid", userId));
             resp.sendRedirect("desserts");
         }
         this.doGet(req, resp);
