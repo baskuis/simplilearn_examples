@@ -1,3 +1,187 @@
+Adding a dessert:
+ >> curl -X POST 'http://localhost:8081/widgets/desserts' --data 'dessert-name=Tira+Misu+2' --compressed -vi
+
+Showing desserts:
+ >> curl -X GET 'http://localhost:8081/widgets/desserts' -vi
+
+
+
+GET - Get it
+POST - Add it
+PUT - Update it
+DELETE - Delete it
+
+Create/Read/Update/Delete (CRUD)
+
+-----------------------------------
+
+HTTP VERBS/METHODS
+
+Request:
+-----------------------------
+GET - Get me that content please?
+	|| No body, just a path
+	|| browsers show history? Yes
+	|| can I go back to it? Back button? Yes
+	
+POST - Add this content please?
+	|| Yes is has a body
+	|| browsers don't keep in history
+	|| can I go back to it? Not really - some browsers yes
+	
+PUT - Update this content please?
+	|| The path should point to the content being updated
+	|| Yes is has a body
+	|| browsers don't keep in history
+	|| can I go back to it? Not really - some browsers yes
+	
+DELETE - Delete this content please?
+	|| The path should point to the content being deleted
+	|| Delete has no body
+	|| no history
+	|| can I go back to it? maybe? not really 
+	
+OPTIONS - Show me what I can do please?
+	|| The path should point to the content being questioned
+	|| No body
+	|| no history
+	
+-----------------
+
+
+Cached: Local copy is kept - a request will show local copy vs going on the network to get fresh copy. - saves effort
+
+
+Response:
+-----------------------------
+GET - Here is your content
+	|| Body
+	|| Body is cached (often)
+
+POST - Here is your result
+	|| Body
+	|| Body not cached
+		
+PUT - Here is your result
+	|| Body
+	|| Body not cached
+	
+DELETE - Yes/No
+	|| No Body
+	|| No Cache
+
+OPTIONS - Here are the options
+	|| No Body
+	|| Cached
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Project: LockedMe.com
+Developer: Bas Kuis
+
+---------------------------------
+
+Duration: 3 weeks
+Type: Scrum
+Sprint Duration: 1 week
+
+-------------------------------------
+
+Sprint 1:
+	 - Build welcome screen
+	 - Add app name and developer details
+	 - Show main menu
+	 - Show options in main menu
+	 - Add option 1 in main menu (Show files in ascending order)
+	 - Support closing the application
+
+Sprint 2:
+	 - Show option 2 (file operations)
+	 - Show File operations menu
+	 - Add option 1 in file operations. Add a file
+	 - Add option 2 in file operations. Delete a file
+
+Sprint 3: (keeping it light to account for unknowns)
+     - Search a file
+     - Back to main menu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Functional Interfaces
+ - Interface with one method
+ - can be used with a lambda 
+ 	- () -> {}
+ 	- basically a method without a class around it
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ClassA extends ClassB

@@ -8,4 +8,16 @@
         <servlet-name>desserts-servlet</servlet-name>
         <url-pattern>/desserts</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>logging-filter</filter-name>
+        <filter-class>widgetstore.web.LoggingFilter</filter-class>
+        <init-param>
+            <param-name>prefix</param-name>
+            <param-value>Bananas are tasty</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>logging-filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
