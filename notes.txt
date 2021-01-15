@@ -1,3 +1,67 @@
+create table goodstuff (id int(10) NOT NULL AUTO_INCREMENT, name varchar(55), PRIMARY KEY (id));
+
+
+
+
+
+
+
+
+
+
+DataSource
+	- connection configuration
+Connection
+	- active connection
+Statement 
+	- SQL Query ie: SELECT * FROM awesomePeople;
+ResultSet 
+	- Represents result of query
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.) Java Database Connectivity (JDBC) 
+n.) Databases ... 
+	- JDBC needs to be agnostic - not specific to any database implementation
+	- SQL based
+	- Driver (database driver)
+	- mysql, postres, oracle, mongo, mariadb, sql server
+	
+Benefits:
+	- As long as data is somewhat simple - we can swap out
+	- our database. 
+		- Dev vs prod
+		- Fast development
+		- Flexibility 
+		- Upgrades
+		- Portability
+		- Migrations	
+		
+
+
+
+
+
+
+
+
+
 
 
 

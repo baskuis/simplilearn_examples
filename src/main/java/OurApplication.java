@@ -37,20 +37,16 @@ public class OurApplication {
     static public void main (String[] args) throws ClassNotFoundException {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/widgets?createDatabaseIfNotExist=true", "root", "root")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/desserts?createDatabaseIfNotExist=true", "root", "root")) {
             if (conn != null) {
                 System.out.println("Connected to the database!");
-                String query = "select COF_NAME, SUP_ID, PRICE, SALES, TOTAL from COFFEES";
+                String query = "select id, name from goodstuff";
                 try (Statement stmt = conn.createStatement()) {
                     ResultSet rs = stmt.executeQuery(query);
                     while (rs.next()) {
-                        String coffeeName = rs.getString("COF_NAME");
-                        int supplierID = rs.getInt("SUP_ID");
-                        float price = rs.getFloat("PRICE");
-                        int sales = rs.getInt("SALES");
-                        int total = rs.getInt("TOTAL");
-                        System.out.println(coffeeName + ", " + supplierID + ", " + price +
-                                ", " + sales + ", " + total);
+                        int id = rs.getInt("id");
+                        String name = rs.getString("name");
+                        System.out.println(id + ", " + name);
                     }
                 }
             } else {
