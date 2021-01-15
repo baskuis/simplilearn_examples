@@ -19,6 +19,7 @@ import videogames.HalfLife;
 import videogames.SuperMario;
 
 import java.io.*;
+import java.sql.*;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,8 +34,36 @@ public class OurApplication {
 
     static int counter = 0;
 
-    static public void main (String[] args) {
+    static public void main (String[] args) throws ClassNotFoundException {
 
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/widgets?createDatabaseIfNotExist=true", "root", "root")) {
+            if (conn != null) {
+                System.out.println("Connected to the database!");
+                String query = "select COF_NAME, SUP_ID, PRICE, SALES, TOTAL from COFFEES";
+                try (Statement stmt = conn.createStatement()) {
+                    ResultSet rs = stmt.executeQuery(query);
+                    while (rs.next()) {
+                        String coffeeName = rs.getString("COF_NAME");
+                        int supplierID = rs.getInt("SUP_ID");
+                        float price = rs.getFloat("PRICE");
+                        int sales = rs.getInt("SALES");
+                        int total = rs.getInt("TOTAL");
+                        System.out.println(coffeeName + ", " + supplierID + ", " + price +
+                                ", " + sales + ", " + total);
+                    }
+                }
+            } else {
+                System.out.println("Failed to make connection!");
+            }
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void streamExample() {
         List<String> words = Arrays.asList("HI", "how", "are", "you");
 
         words.stream()
