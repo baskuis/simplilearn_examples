@@ -36,6 +36,10 @@ public class OurApplication {
 
     static public void main (String[] args) throws ClassNotFoundException {
 
+
+    }
+
+    public static void dbConnectExample() throws ClassNotFoundException {
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/desserts?createDatabaseIfNotExist=true", "root", "root")) {
             if (conn != null) {
@@ -159,7 +163,7 @@ public class OurApplication {
         List<DessertDTO> desserts = dessertDAO.getDesserts();
 
         DessertDTO pudding = new DessertDTO(
-                "pudding", false
+                12L, "pudding", false
         );
 
         dessertDAO.create(pudding);

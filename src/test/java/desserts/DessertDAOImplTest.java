@@ -34,7 +34,7 @@ class DessertDAOImplTest {
     void canIUpdateADessert() {
 
         // setup
-        DessertDTO toUpdate = new DessertDTO("Was good", true);
+        DessertDTO toUpdate = new DessertDTO(1L, "Was good", true);
         dessertDAO.create(toUpdate);
 
         // when

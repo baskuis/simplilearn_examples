@@ -1,5 +1,6 @@
 package desserts;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,17 +9,36 @@ public class DessertDAOImpl implements GenericDAO<DessertDTO> {
 
     List<DessertDTO> desserts = new ArrayList<>();
 
+    Connection conn = null;
+
     public DessertDAOImpl() {
-        desserts.add(new DessertDTO("Tira Misu", true));
-        desserts.add(new DessertDTO("Petit Four", true));
-        desserts.add(new DessertDTO("Cheesecake", true));
-        desserts.add(new DessertDTO("Creme Brule", true));
-        desserts.add(new DessertDTO("Bonbons", true));
-        desserts.add(new DessertDTO("Brownies", true));
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/desserts?createDatabaseIfNotExist=true", "root", "root");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Driver not found");
+        } catch (SQLException e) {
+            System.out.println("SQL exception");
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<DessertDTO> getDesserts() {
+        List<DessertDTO> desserts = new ArrayList<>();
+        String query = "select id, name, good from goodstuff";
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                long id = rs.getLong("id");
+                String name = rs.getString("name");
+                boolean good = rs.getBoolean("good");
+                desserts.add(new DessertDTO(id, name, good));
+            }
+        } catch (SQLException e) {
+            System.out.println("unable to run query");
+            e.printStackTrace();
+        }
         return desserts;
     }
 

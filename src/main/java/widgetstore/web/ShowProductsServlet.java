@@ -31,7 +31,7 @@ public class ShowProductsServlet extends HttpServlet {
 
         out.println("<h2>Desserts</h2>");
         for (DessertDTO dessert: dessertDTO.getDesserts()) {
-            out.println("<p>" + dessert.getName() + "</p>");
+            out.println("<p>" + dessert.getId() + ": " + dessert.getName() + " It is good:" + dessert.isGood() + "</p>");
         }
     }
 
@@ -39,6 +39,7 @@ public class ShowProductsServlet extends HttpServlet {
                       HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("dessert-name");
         dessertDTO.create(new DessertDTO(
+                1L,
                 name,
                 true
         ));

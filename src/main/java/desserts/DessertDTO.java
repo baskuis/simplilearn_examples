@@ -2,12 +2,18 @@ package desserts;
 
 public class DessertDTO {
 
+    Long id;
     String name;
     boolean good;
 
-    public DessertDTO(String name, boolean good) {
+    public DessertDTO(Long id, String name, boolean good) {
+        this.id = id;
         this.name = name;
         this.good = good;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
