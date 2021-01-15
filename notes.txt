@@ -1,6 +1,12 @@
-create table goodstuff (id int(10) NOT NULL AUTO_INCREMENT, name varchar(55), PRIMARY KEY (id));
 
-
+SQL EXAMPLES:
+------------------------------------
+create database desserts;
+use desserts;
+create table goodstuff (id int(10) NOT NULL AUTO_INCREMENT, name varchar(55), good tinyint(1), PRIMARY KEY (id));
+insert into goodstuff (name, good) VALUES ("chocolate", 0);
+insert into goodstuff (name, good) VALUES ("tiramisu", 1);
+insert into goodstuff (name, good) VALUES ("bananas", 1);
 
 
 
