@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 
 public class DessertDAOImpl implements GenericDAO<DessertDTO> {
 
+    final static String SELECT_ALL_SQL = "select id, name, good from goodstuff";
+    final static String INSERT_SQL = "insert into goodstuff (name, good) values (?, ?)";
+    final static String BY_NAME_SQL = "select id, name, good from goodstuff order by name asc";
+
     List<DessertDTO> desserts = new ArrayList<>();
 
     Connection conn = null;
@@ -26,9 +30,8 @@ public class DessertDAOImpl implements GenericDAO<DessertDTO> {
     @Override
     public List<DessertDTO> getDesserts() {
         List<DessertDTO> desserts = new ArrayList<>();
-        String query = "select id, name, good from goodstuff";
         try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(query);
+            ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL);
             while (rs.next()) {
                 long id = rs.getLong("id");
                 String name = rs.getString("name");
@@ -42,30 +45,42 @@ public class DessertDAOImpl implements GenericDAO<DessertDTO> {
         return desserts;
     }
 
-    public static interface GetGood {
+    public interface GetGood {
         boolean good(DessertDTO dessertDTO);
     }
 
-    public static interface Convert<I,O> {
+    public interface Convert<I,O> {
         O execute(I in);
     }
 
-    public List<String> sortedByName() {
-
-        Convert<DessertDTO, String> out = (DessertDTO dessertDTO) -> {
-            return dessertDTO.name;
-        };
-
-        return desserts.stream()
-                .sorted(DessertDTO::compareByName)
-                .map(dessertDTO -> dessertDTO.name)
-                .collect(Collectors.toList());
+    public List<DessertDTO> sortedByName() {
+        List<DessertDTO> desserts = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(BY_NAME_SQL);
+            while (rs.next()) {
+                long id = rs.getLong("id");
+                String name = rs.getString("name");
+                boolean good = rs.getBoolean("good");
+                desserts.add(new DessertDTO(id, name, good));
+            }
+        } catch (SQLException e) {
+            System.out.println("unable to run query");
+            e.printStackTrace();
+        }
+        return desserts;
     }
 
     @Override
     public DessertDTO create(DessertDTO dessert) {
-        desserts.add(dessert);
-        return dessert;
+        try (PreparedStatement preparedStatement = conn.prepareStatement(INSERT_SQL)) {
+            preparedStatement.setString(1, dessert.getName());
+            preparedStatement.setInt(2, (dessert.isGood() ? 1 : 0));
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.out.println("unable to run query");
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

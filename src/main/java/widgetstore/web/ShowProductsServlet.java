@@ -26,6 +26,7 @@ public class ShowProductsServlet extends HttpServlet {
 
         out.println("<form action='' method='POST'>");
         out.println("<label>Enter Dessert Name: <input type='text' name='dessert-name'></input></label>");
+        out.println("<label>Enter If Good: <input type='radio' name='dessert-good' value='0' />No <input type='radio' name='dessert-good' value='1' />Yes</label>");
         out.println("<input type='submit'>Create Dessert</input>");
         out.println("</form>");
 
@@ -38,10 +39,12 @@ public class ShowProductsServlet extends HttpServlet {
     public void doPost(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("dessert-name");
+        String good = request.getParameter("dessert-good");
+        Boolean isGood = Boolean.parseBoolean(good);
         dessertDTO.create(new DessertDTO(
-                1L,
+                null,
                 name,
-                true
+                isGood
         ));
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
