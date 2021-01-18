@@ -3,9 +3,8 @@ package desserts;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class DessertDAOImpl implements GenericDAO<DessertDTO> {
+public class DessertDAOImpl implements DessertDAO {
 
     final static String SELECT_ALL_SQL = "select id, name, good from goodstuff";
     final static String INSERT_SQL = "insert into goodstuff (name, good) values (?, ?)";
@@ -45,11 +44,30 @@ public class DessertDAOImpl implements GenericDAO<DessertDTO> {
         return desserts;
     }
 
+    /**
+     * Example on how to call a stored procedure
+     */
+    public boolean isGood(Long dessertId) {
+        try (CallableStatement cs = conn.prepareCall("{CALL GetIsGood(?, ?)}")) {
+            cs.setLong(1, dessertId);
+            cs.registerOutParameter(2, java.sql.Types.INTEGER);
+            cs.executeUpdate();
+            int good = cs.getInt(2);
+            return (good == 1);
+        } catch (SQLException e) {
+            System.out.println("Unable to run query");
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public interface GetGood {
         boolean good(DessertDTO dessertDTO);
     }
 
-    public interface Convert<I,O> {
+    public interface Convert<I, O> {
         O execute(I in);
     }
 
@@ -72,10 +90,24 @@ public class DessertDAOImpl implements GenericDAO<DessertDTO> {
 
     @Override
     public DessertDTO create(DessertDTO dessert) {
-        try (PreparedStatement preparedStatement = conn.prepareStatement(INSERT_SQL)) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(
+                INSERT_SQL,
+                Statement.RETURN_GENERATED_KEYS
+        )) {
             preparedStatement.setString(1, dessert.getName());
             preparedStatement.setInt(2, (dessert.isGood() ? 1 : 0));
-            preparedStatement.execute();
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Unable to create record");
+            }
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    dessert.setId(generatedKeys.getLong(1));
+                    return dessert;
+                } else {
+                    throw new SQLException("Creating dessert failed, no ID obtained.");
+                }
+            }
         } catch (SQLException e) {
             System.out.println("unable to run query");
             e.printStackTrace();

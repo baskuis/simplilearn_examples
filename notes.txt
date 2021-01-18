@@ -1,3 +1,31 @@
+STORED PROCEDURE:
+- Create the following stored procedure in mysql
+
+DELIMITER $$
+
+CREATE PROCEDURE GetIsGood(
+	IN id int(10),
+	OUT good tinyint(1)
+)
+BEGIN
+  SELECT goodstuff.good
+  INTO good
+  FROM goodstuff
+  WHERE goodstuff.id = id;
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+
 
 SQL EXAMPLES:
 ------------------------------------
