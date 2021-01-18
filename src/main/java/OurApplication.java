@@ -36,11 +36,15 @@ public class OurApplication {
     static int counter = 0;
 
     static public void main (String[] args) throws ClassNotFoundException {
-        DessertDAO dessertDAO = new DessertDAOImpl();
-        DessertDTO dessertDTO = dessertDAO.create(
-                new DessertDTO("Chocolate Pudding", false)
-        );
-        System.out.println(dessertDAO.isGood(dessertDTO.getId()));
+
+//        DessertDTO dessertDTO = dessertDAO.create(
+//                new DessertDTO("Chocolate Pudding", false)
+//        );
+//        System.out.println(dessertDAO.isGood(1L));
+
+        DessertDAOImpl dessertDAO = new DessertDAOImpl();
+        String art = dessertDAO.getGoodDesserts("Totallygood", true);
+        System.out.println(art);
     }
 
     public static void dbConnectExample() throws ClassNotFoundException {

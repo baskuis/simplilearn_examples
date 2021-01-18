@@ -44,6 +44,22 @@ public class DessertDAOImpl implements DessertDAO {
         return desserts;
     }
 
+    public String getGoodDesserts(String dessertName, boolean good) {
+        try (CallableStatement cs = conn.prepareCall("{CALL AddDessertAndArt(?, ?, ?)}")) {
+            cs.setString(1, dessertName);
+            cs.setInt(2, (good ? 1 : 0));
+            cs.registerOutParameter(3, Types.VARCHAR);
+            cs.executeUpdate();
+            return cs.getString(3);
+        } catch (SQLException e) {
+            System.out.println("Unable to run query");
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * Example on how to call a stored procedure
      */
@@ -61,14 +77,6 @@ public class DessertDAOImpl implements DessertDAO {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public interface GetGood {
-        boolean good(DessertDTO dessertDTO);
-    }
-
-    public interface Convert<I, O> {
-        O execute(I in);
     }
 
     public List<DessertDTO> sortedByName() {

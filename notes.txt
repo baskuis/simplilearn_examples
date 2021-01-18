@@ -1,11 +1,65 @@
-STORED PROCEDURE:
-- Create the following stored procedure in mysql
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS AddDessertAndArt$$
+CREATE PROCEDURE AddDessertAndArt(
+	IN nameOfDessert varchar(155),
+	IN goodOrNot tinyint(1),
+	OUT art varchar(255)
+)
+BEGIN
+	INSERT INTO goodstuff (
+		name, 
+		good
+	) VALUES (
+		nameOfDessert, 
+		goodOrNot
+	);
+	SELECT CONCAT(good,
+		GROUP_CONCAT(goodstuff.name SEPARATOR ', ')
+	) INTO art
+	FROM goodstuff
+	WHERE goodstuff.good = 0;
+END$$
+DELIMITER ;
+
+
+
+
+
+
+
+- Example which uses multiple queries
 
 DELIMITER $$
 
-CREATE PROCEDURE GetIsGood(
+CREATE PROCEDURE GetAlsoGood(
 	IN id int(10),
-	OUT good tinyint(1)
+	OUT good tinyint(1),
+	OUT alsoGood tinyint(1)
+)
+BEGIN
+	SELECT goodstuff.good
+	INTO good
+	FROM goodstuff
+	WHERE goodstuff.id = id;
+  
+  	SELECT goodstuff.good
+	INTO alsoGood
+	FROM goodstuff
+	WHERE goodstuff.id = id + 1;
+END$$
+
+DELIMITER ;
+
+
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE GetIsBad(
+	IN id int(10),
+	OUT goodBAD tinyint(1)
 )
 BEGIN
   SELECT goodstuff.good
@@ -15,8 +69,6 @@ BEGIN
 END$$
 
 DELIMITER ;
-
-
 
 
 
