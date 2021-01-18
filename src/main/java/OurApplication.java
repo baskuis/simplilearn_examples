@@ -37,14 +37,63 @@ public class OurApplication {
 
     static public void main (String[] args) throws ClassNotFoundException {
 
-//        DessertDTO dessertDTO = dessertDAO.create(
-//                new DessertDTO("Chocolate Pudding", false)
-//        );
-//        System.out.println(dessertDAO.isGood(1L));
+    }
 
+    public static void dbLifeCycleExample() throws ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "root")) {
+
+            String ourDatabase = "somedatabase";
+            try (Statement statement = conn.createStatement()) {
+
+                int affectedRows = statement.executeUpdate("CREATE DATABASE " + ourDatabase);
+                if (affectedRows == 0) {
+                    System.out.println("no changes");
+                } else {
+                    System.out.println("database[" + ourDatabase + "] created");
+                }
+
+                useDatabase(ourDatabase, statement);
+
+                dropDatabase(ourDatabase, statement);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("SQL exception");
+            e.printStackTrace();
+        }
+    }
+
+    public static void dropDatabase(String db, Statement statement) {
+        try {
+            statement.execute("DROP DATABASE " + db);
+            System.out.println("database [" + db + "] dropped");
+        } catch (SQLException e) {
+            System.out.println("Unable to run query");
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
+            e.printStackTrace();
+        }
+    }
+
+    public static void useDatabase(String db, Statement statement) {
+        try {
+            statement.execute("USE " + db);
+            System.out.println("switched");
+        } catch (SQLException e) {
+            System.out.println("Unable to run query");
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
+            e.printStackTrace();
+        }
+    }
+
+    public static void storedProcedureExample() {
         DessertDAOImpl dessertDAO = new DessertDAOImpl();
         String art = dessertDAO.getGoodDesserts("Totallygood", true);
         System.out.println(art);
+
+        System.out.println(dessertDAO.isGood(1L));
     }
 
     public static void dbConnectExample() throws ClassNotFoundException {

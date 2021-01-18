@@ -57,7 +57,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-CREATE PROCEDURE GetIsBad(
+CREATE PROCEDURE GetIsGood(
 	IN id int(10),
 	OUT goodBAD tinyint(1)
 )
