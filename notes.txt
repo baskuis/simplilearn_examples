@@ -18,7 +18,7 @@ BEGIN
 		GROUP_CONCAT(goodstuff.name SEPARATOR ', ')
 	) INTO art
 	FROM goodstuff
-	WHERE goodstuff.good = 0;
+	WHERE goodstuff.good = 1;
 END$$
 DELIMITER ;
 
