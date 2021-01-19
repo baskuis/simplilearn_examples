@@ -1,3 +1,54 @@
+SQL Syntax for insert/update/delete.
+------------------------------------
+Often there is unique numeric 'id' column.
+
+SELECT 
+	columnA, 
+	columnB 
+FROM nameoftable
+WHERE 
+	idColumns = 12;
+
+INSERT INTO nameoftable (
+	columnA,
+	columnB
+) VALUES (
+	"Value A",
+	"Value B"
+);
+
+UPDATE nameoftable SET
+	columnA = "New Value A",
+	columnB = "New Value B"
+WHERE 
+	idColumn = 12;
+	
+
+DELETE FROM nameoftable 
+WHERE 
+	columnA = "New Value A";	
+
+----------------
+Why not use a numeric id? 
+ - Makes it hard/impossible to predict adjacent values
+ - Big datasets? - sometimes a pre-fix is used for sharding
+ - Distributed systems, to prevent collisions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS AddDessertAndArt$$
