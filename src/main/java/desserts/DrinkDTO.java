@@ -48,9 +48,10 @@ public class DrinkDTO {
     @Override
     public String toString() {
         return "DrinkDTO{" +
-                "name='" + name + '\'' +
-                ", good=" + good +
-                '}';
+                "id='" + id + "'," +
+                "name='" + name + "'," +
+                "good=" + good +
+                "}";
     }
 
 }

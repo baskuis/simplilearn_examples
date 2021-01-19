@@ -129,6 +129,11 @@ public class DessertDAOImpl implements DessertDAO {
     }
 
     @Override
+    public void remove(Long id) {
+
+    }
+
+    @Override
     public DessertDTO update(DessertDTO dessert) {
         return null;
     }

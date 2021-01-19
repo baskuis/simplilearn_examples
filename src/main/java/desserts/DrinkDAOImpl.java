@@ -6,8 +6,10 @@ import java.util.List;
 
 public class DrinkDAOImpl implements DrinkDAO {
 
-    final static String SELECT_ALL_SQL = "select id, name, good from drinks";
-    final static String INSERT_SQL = "insert into drinks (name, good) values (?, ?)";
+    final static String SELECT_ALL_SQL = "SELECT id, name, good FROM drinks;";
+    final static String INSERT_SQL = "INSERT INTO drinks (name, good) VALUES (?, ?);";
+    final static String UPDATE_SQL = "UPDATE drinks SET name = ?, good = ? WHERE id = ?;";
+    final static String DELETE_SQL = "DELETE FROM drinks WHERE id = ?;";
 
     Connection conn = null;
 
@@ -69,12 +71,50 @@ public class DrinkDAOImpl implements DrinkDAO {
     }
 
     @Override
-    public void remove(DrinkDTO dessert) {
-
+    public void remove(Long id) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(DELETE_SQL)) {
+            preparedStatement.setInt(1, id.intValue());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.out.println("Unable to run query");
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public DrinkDTO update(DrinkDTO dessert) {
+    public void remove(DrinkDTO drink) {
+        try (PreparedStatement preparedStatement = conn.prepareStatement(DELETE_SQL)) {
+            preparedStatement.setInt(1, drink.getId().intValue());
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            System.out.println("Unable to run query");
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public DrinkDTO update(DrinkDTO drink) {
+        if (drink.getId() > Integer.MAX_VALUE) {
+            throw new RuntimeException("ID too large");
+        }
+        try (PreparedStatement preparedStatement = conn.prepareStatement(UPDATE_SQL)) {
+            preparedStatement.setString(1, drink.getName());
+            preparedStatement.setInt(2, drink.isGood() ? 1 : 0);
+            preparedStatement.setInt(3, drink.getId().intValue());
+            int changes = preparedStatement.executeUpdate();
+            if (changes > 0) {
+                return drink;
+            }
+        } catch (SQLException e) {
+            System.out.println("Unable to run query");
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
+            e.printStackTrace();
+        }
         return null;
     }
 

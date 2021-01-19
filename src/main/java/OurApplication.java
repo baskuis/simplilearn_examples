@@ -35,12 +35,19 @@ public class OurApplication {
     static public void main (String[] args) throws ClassNotFoundException {
 
         DrinkDAO drinkDAO = new DrinkDAOImpl();
-        drinkDAO.create(new DrinkDTO(
+        DrinkDTO drink = drinkDAO.create(new DrinkDTO(
                 "orange juice",
                 true
         ));
+
+        drinkDAO.remove(4L);
+
+        drink.setName("not orange juice");
+        drinkDAO.update(drink);
+
         List<DrinkDTO> drinks = drinkDAO.getAll();
         drinks.forEach((d) -> System.out.println(d.toString()));
+
 
     }
 

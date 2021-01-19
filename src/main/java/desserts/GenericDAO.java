@@ -10,6 +10,8 @@ public interface GenericDAO<T> {
 
     void remove(T entity);
 
+    void remove(Long id);
+
     T update(T entity);
 
     int count();
