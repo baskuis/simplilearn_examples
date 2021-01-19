@@ -43,7 +43,7 @@ public class OurApplication {
         Class.forName("com.mysql.cj.jdbc.Driver");
         try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "root")) {
 
-            String ourDatabase = "somedatabase";
+            String ourDatabase = "mynewdatabase";
             try (Statement statement = conn.createStatement()) {
 
                 int affectedRows = statement.executeUpdate("CREATE DATABASE " + ourDatabase);
