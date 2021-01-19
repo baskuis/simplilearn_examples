@@ -31,7 +31,7 @@ public class ShowProductsServlet extends HttpServlet {
         out.println("</form>");
 
         out.println("<h2>Desserts</h2>");
-        for (DessertDTO dessert: dessertDTO.getDesserts()) {
+        for (DessertDTO dessert: dessertDTO.getAll()) {
             out.println("<p>" + dessert.getId() + ": " + dessert.getName() + " It is good:" + dessert.isGood() + "</p>");
         }
     }

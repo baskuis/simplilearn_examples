@@ -27,7 +27,7 @@ public class DessertDAOImpl implements DessertDAO {
     }
 
     @Override
-    public List<DessertDTO> getDesserts() {
+    public List<DessertDTO> getAll() {
         List<DessertDTO> desserts = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(SELECT_ALL_SQL);
@@ -124,7 +124,7 @@ public class DessertDAOImpl implements DessertDAO {
     }
 
     @Override
-    public void eat(DessertDTO dessert) {
+    public void remove(DessertDTO dessert) {
         desserts.remove(dessert);
     }
 

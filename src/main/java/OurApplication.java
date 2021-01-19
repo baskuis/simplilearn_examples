@@ -9,10 +9,7 @@ import cereals.SoggyFruitLoopsCereal;
 import concurrency.Hare;
 import concurrency.Race;
 import concurrency.Tortoise;
-import desserts.DessertDAO;
-import desserts.GenericDAO;
-import desserts.DessertDAOImpl;
-import desserts.DessertDTO;
+import desserts.*;
 import dundermifflin.PaperCompany;
 import excersizes.*;
 import fruits.Kiwi;
@@ -36,6 +33,14 @@ public class OurApplication {
     static int counter = 0;
 
     static public void main (String[] args) throws ClassNotFoundException {
+
+        DrinkDAO drinkDAO = new DrinkDAOImpl();
+        drinkDAO.create(new DrinkDTO(
+                "orange juice",
+                true
+        ));
+        List<DrinkDTO> drinks = drinkDAO.getAll();
+        drinks.forEach((d) -> System.out.println(d.toString()));
 
     }
 
@@ -217,7 +222,7 @@ public class OurApplication {
     static void daoExample() {
 
         GenericDAO<DessertDTO> dessertDAO = new DessertDAOImpl();
-        List<DessertDTO> desserts = dessertDAO.getDesserts();
+        List<DessertDTO> desserts = dessertDAO.getAll();
 
         DessertDTO pudding = new DessertDTO(
                 12L, "pudding", false
@@ -225,7 +230,7 @@ public class OurApplication {
 
         dessertDAO.create(pudding);
         System.out.println("List size: " + dessertDAO.count());
-        dessertDAO.eat(pudding);
+        dessertDAO.remove(pudding);
         System.out.println("List size: " + dessertDAO.count());
 
         for (DessertDTO dessert : desserts) {

@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface GenericDAO<T> {
 
-    List<T> getDesserts();
+    List<T> getAll();
 
-    T create(T dessert);
+    T create(T entity);
 
-    void eat(T dessert);
+    void remove(T entity);
 
-    T update(T dessert);
+    T update(T entity);
 
     int count();
 

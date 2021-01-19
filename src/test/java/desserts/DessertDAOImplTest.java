@@ -19,7 +19,7 @@ class DessertDAOImplTest {
     void canIGetDesserts() {
 
         // when
-        List<DessertDTO> desserts = dessertDAO.getDesserts();
+        List<DessertDTO> desserts = dessertDAO.getAll();
 
         // then
         assertNotNull(desserts);
@@ -40,7 +40,7 @@ class DessertDAOImplTest {
         // when
         toUpdate.setGood(false);
         dessertDAO.update(toUpdate);
-        List<DessertDTO> desserts = dessertDAO.getDesserts();
+        List<DessertDTO> desserts = dessertDAO.getAll();
         DessertDTO updatedDesert = null;
         for (DessertDTO newDesert : desserts) {
             if (newDesert.getName().equals("Was good")) {
