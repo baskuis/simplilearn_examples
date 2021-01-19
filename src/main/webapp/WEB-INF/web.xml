@@ -9,12 +9,20 @@
         <servlet-class>web.MyGenericServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>drink-details</servlet-name>
+        <servlet-class>widgetstore.web.DrinkDetailsServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>login</servlet-name>
         <servlet-class>web.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>desserts-servlet</servlet-name>
         <url-pattern>/desserts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>drink-details</servlet-name>
+        <url-pattern>/drinks</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>vanilla</servlet-name>
@@ -42,6 +50,6 @@
     </filter>
     <filter-mapping>
         <filter-name>need-permission</filter-name>
-        <url-pattern>/desserts</url-pattern>
+        <url-pattern>/drinks</url-pattern>
     </filter-mapping>
 </web-app>
