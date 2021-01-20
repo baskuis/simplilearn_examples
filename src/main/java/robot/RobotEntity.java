@@ -15,6 +15,17 @@ public class RobotEntity implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "weight")
+    private Long weight;
+
+    public Long getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Long weight) {
+        this.weight = weight;
+    }
+
     public long getId() {
         return id;
     }

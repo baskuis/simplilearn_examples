@@ -16,6 +16,7 @@ import excersizes.OurCircularLinkedList;
 import excersizes.OurDoublyLinkedList;
 import excersizes.OurSinglyLinkedList;
 import fruits.Kiwi;
+import hibernate.HibernateUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -43,13 +44,16 @@ public class OurApplication {
 
     public static void main(String[] args) {
         try {
-            hibernateSession = buildSessionFactory().openSession();
+            hibernateSession = HibernateUtils
+                    .buildSessionFactory()
+                    .openSession();
             hibernateSession.beginTransaction();
 
             /* Insert some robots */
             for (int i = 0; i <= 10; i++) {
                 RobotEntity robot = new RobotEntity();
                 robot.setName("awesome robot number:" + i);
+                robot.setWeight(i * 100L);
                 hibernateSession.save(robot);
             }
 
@@ -59,7 +63,11 @@ public class OurApplication {
             criteria.from(RobotEntity.class);
             List<RobotEntity> robots = hibernateSession.createQuery(criteria).getResultList();
 
-            robots.forEach((r) -> System.out.println("r: " + r.getId() + " " + r.getName()));
+            robots.forEach((r) -> System.out.println(
+                    "r: " + r.getId() +
+                            " name:" + r.getName() +
+                            " weight:" + r.getWeight()
+            ));
 
             hibernateSession.getTransaction().commit();
         } catch(Exception sqlException) {
@@ -75,19 +83,7 @@ public class OurApplication {
     }
 
     static Session hibernateSession;
-    static SessionFactory hibernateSessionFactory;
 
-    private static SessionFactory buildSessionFactory() {
-        Configuration conf = new Configuration();
-        conf.addAnnotatedClass(RobotEntity.class);
-        conf.configure("hibernate.cfg.xml");
-        ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder()
-                .applySettings(
-                        conf.getProperties()
-                ).build();
-        hibernateSessionFactory = conf.buildSessionFactory(serviceRegistryObj);
-        return hibernateSessionFactory;
-    }
 
     static int counter = 0;
 
