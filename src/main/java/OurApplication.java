@@ -11,6 +11,7 @@ import concurrency.Race;
 import concurrency.Tortoise;
 import desserts.*;
 import dundermifflin.PaperCompany;
+import ecommerce.LaptopEntity;
 import excersizes.LongestIncreasingSubsequence;
 import excersizes.OurCircularLinkedList;
 import excersizes.OurDoublyLinkedList;
@@ -57,6 +58,14 @@ public class OurApplication {
                 robot.setEvil((i % 2 == 1));
                 robot.setWeight(i * 100L);
                 hibernateSession.save(robot);
+            }
+
+            /* Insert some laptops */
+            for (int i = 0; i <= 10; i++) {
+                LaptopEntity laptop = new LaptopEntity();
+                laptop.setName("SomeBook" + i);
+                laptop.setPrice(10F * i);
+                hibernateSession.save(laptop);
             }
 
             /* Get all robots */

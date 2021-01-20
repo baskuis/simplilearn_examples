@@ -25,14 +25,14 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userid");
         String password = req.getParameter("password");
-        if (userId != null && password.equals("letmein")) {
+        if (userId != null && password != null) {
 
             /** This is what makes it a "valid" login */
             req.getSession().setAttribute(
                     "userid", userId
             );
 
-            resp.sendRedirect("drinks");
+            resp.sendRedirect("laptop");
         }
         this.doGet(req, resp);
     }
