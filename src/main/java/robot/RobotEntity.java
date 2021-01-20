@@ -2,6 +2,8 @@ package robot;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 @Table(name = "robot")
 @Entity
@@ -23,6 +25,17 @@ public class RobotEntity implements Serializable {
 
     @Column(name = "is_evil")
     private Boolean isEvil;
+
+    @ElementCollection
+    Map<String, String> parts = new HashMap<>();
+
+    public Map<String, String> getParts() {
+        return parts;
+    }
+
+    public void setParts(Map<String, String> parts) {
+        this.parts = parts;
+    }
 
     public Boolean getEvil() {
         return isEvil;

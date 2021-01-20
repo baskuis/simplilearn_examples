@@ -57,6 +57,9 @@ public class OurApplication {
                 robot.setSwitchedOn((i % 2 == 0));
                 robot.setEvil((i % 2 == 1));
                 robot.setWeight(i * 100L);
+                robot.getParts().put("motor", "electric");
+                robot.getParts().put("power", "nuclear");
+                robot.getParts().put("weapon", "hammer");
                 hibernateSession.save(robot);
             }
 
@@ -74,13 +77,19 @@ public class OurApplication {
             criteria.from(RobotEntity.class);
             List<RobotEntity> robots = hibernateSession.createQuery(criteria).getResultList();
 
-            robots.forEach((r) -> System.out.println(
+            robots.forEach((r) ->  {
+                System.out.println(
                     "r: " + r.getId() +
                             " name:" + r.getName() +
                             " weight:" + r.getWeight() +
                             " on:" + r.getSwitchedOn() +
                             " evil:" + r.getEvil()
-            ));
+                );
+                System.out.println("motor:" + r.getParts().get("motor"));
+                System.out.println("power:" + r.getParts().get("power"));
+                System.out.println("weapon:" + r.getParts().get("weapon"));
+                System.out.println("====================");
+            });
 
             hibernateSession.getTransaction().commit();
         } catch(Exception sqlException) {

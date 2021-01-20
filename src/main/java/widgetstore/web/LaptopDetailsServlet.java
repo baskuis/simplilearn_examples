@@ -16,8 +16,14 @@ public class LaptopDetailsServlet extends HttpServlet {
 
     GenericDAO<DrinkDTO> drinkDAO;
 
+    Session session;
+
     public LaptopDetailsServlet() {
         drinkDAO = new DrinkDAOImpl();
+    }
+
+    public void init() {
+        session = HibernateUtils.buildSessionFactory().openSession();
     }
 
     public void doGet(HttpServletRequest request,
@@ -35,7 +41,6 @@ public class LaptopDetailsServlet extends HttpServlet {
         String laptopId = request.getParameter("laptop-id");
         PrintWriter out = response.getWriter();
 
-        Session session = HibernateUtils.buildSessionFactory().openSession();
         LaptopEntity laptopEntity = session.get(
                 LaptopEntity.class,
                 Long.parseLong(laptopId)
