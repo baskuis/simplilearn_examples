@@ -53,6 +53,8 @@ public class OurApplication {
             for (int i = 0; i <= 10; i++) {
                 RobotEntity robot = new RobotEntity();
                 robot.setName("awesome robot number:" + i);
+                robot.setSwitchedOn((i % 2 == 0));
+                robot.setEvil((i % 2 == 1));
                 robot.setWeight(i * 100L);
                 hibernateSession.save(robot);
             }
@@ -66,7 +68,9 @@ public class OurApplication {
             robots.forEach((r) -> System.out.println(
                     "r: " + r.getId() +
                             " name:" + r.getName() +
-                            " weight:" + r.getWeight()
+                            " weight:" + r.getWeight() +
+                            " on:" + r.getSwitchedOn() +
+                            " evil:" + r.getEvil()
             ));
 
             hibernateSession.getTransaction().commit();

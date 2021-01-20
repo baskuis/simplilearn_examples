@@ -11,14 +11,17 @@ public class HibernateUtils {
 
     static SessionFactory hibernateSessionFactory;
     public static SessionFactory buildSessionFactory() {
+
+        /* Telling hibernate where to connect to + what entities are supported */
         Configuration conf = new Configuration();
         conf.addAnnotatedClass(RobotEntity.class);
         conf.configure("hibernate.cfg.xml");
-        ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder()
+        ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(
                         conf.getProperties()
                 ).build();
-        hibernateSessionFactory = conf.buildSessionFactory(serviceRegistryObj);
+
+        hibernateSessionFactory = conf.buildSessionFactory(registry);
         return hibernateSessionFactory;
     }
 

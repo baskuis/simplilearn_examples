@@ -18,6 +18,28 @@ public class RobotEntity implements Serializable {
     @Column(name = "weight")
     private Long weight;
 
+    @Column(name = "switched_on")
+    private Boolean switchedOn;
+
+    @Column(name = "is_evil")
+    private Boolean isEvil;
+
+    public Boolean getEvil() {
+        return isEvil;
+    }
+
+    public void setEvil(Boolean evil) {
+        isEvil = evil;
+    }
+
+    public Boolean getSwitchedOn() {
+        return switchedOn;
+    }
+
+    public void setSwitchedOn(Boolean switchedOn) {
+        this.switchedOn = switchedOn;
+    }
+
     public Long getWeight() {
         return weight;
     }
