@@ -11,11 +11,22 @@ import concurrency.Race;
 import concurrency.Tortoise;
 import desserts.*;
 import dundermifflin.PaperCompany;
-import excersizes.*;
+import excersizes.LongestIncreasingSubsequence;
+import excersizes.OurCircularLinkedList;
+import excersizes.OurDoublyLinkedList;
+import excersizes.OurSinglyLinkedList;
 import fruits.Kiwi;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import robot.RobotEntity;
 import videogames.HalfLife;
 import videogames.SuperMario;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
@@ -30,9 +41,57 @@ import java.util.stream.Collectors;
 
 public class OurApplication {
 
+    public static void main(String[] args) {
+        try {
+            hibernateSession = buildSessionFactory().openSession();
+            hibernateSession.beginTransaction();
+
+            /* Insert some robots */
+            for (int i = 0; i <= 10; i++) {
+                RobotEntity robot = new RobotEntity();
+                robot.setName("awesome robot number:" + i);
+                hibernateSession.save(robot);
+            }
+
+            /* Get all robots */
+            CriteriaBuilder builder = hibernateSession.getCriteriaBuilder();
+            CriteriaQuery<RobotEntity> criteria = builder.createQuery(RobotEntity.class);
+            criteria.from(RobotEntity.class);
+            List<RobotEntity> robots = hibernateSession.createQuery(criteria).getResultList();
+
+            robots.forEach((r) -> System.out.println("r: " + r.getId() + " " + r.getName()));
+
+            hibernateSession.getTransaction().commit();
+        } catch(Exception sqlException) {
+            if (null != hibernateSession.getTransaction()) {
+                hibernateSession.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        } finally {
+            if (hibernateSession != null) {
+                hibernateSession.close();
+            }
+        }
+    }
+
+    static Session hibernateSession;
+    static SessionFactory hibernateSessionFactory;
+
+    private static SessionFactory buildSessionFactory() {
+        Configuration conf = new Configuration();
+        conf.addAnnotatedClass(RobotEntity.class);
+        conf.configure("hibernate.cfg.xml");
+        ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder()
+                .applySettings(
+                        conf.getProperties()
+                ).build();
+        hibernateSessionFactory = conf.buildSessionFactory(serviceRegistryObj);
+        return hibernateSessionFactory;
+    }
+
     static int counter = 0;
 
-    static public void main (String[] args) throws ClassNotFoundException {
+    public static void createReadUpdateDelete() {
 
         DrinkDAO drinkDAO = new DrinkDAOImpl();
         DrinkDTO drink = drinkDAO.create(new DrinkDTO(
@@ -47,7 +106,6 @@ public class OurApplication {
 
         List<DrinkDTO> drinks = drinkDAO.getAll();
         drinks.forEach((d) -> System.out.println(d.toString()));
-
 
     }
 
