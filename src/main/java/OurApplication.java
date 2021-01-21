@@ -127,6 +127,7 @@ public class OurApplication {
                 System.out.println("weapon:" + r.getParts().get("weapon"));
 
                 System.out.println("Instructions:");
+                try { Thread.sleep(500); } catch (InterruptedException e) { }
                 r.getInstructions().forEach(doStuff);
 
                 System.out.println("====================");
@@ -149,7 +150,7 @@ public class OurApplication {
         System.out.println("Doing stuff");
         System.out.println("Showing: " + instruction.getCommand());
     };
-    
+
     static Session hibernateSession;
 
 

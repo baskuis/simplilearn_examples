@@ -27,13 +27,13 @@ public class RobotEntity implements Serializable {
     @Column(name = "is_evil")
     private Boolean isEvil;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     private Map<String, String> parts = new HashMap<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private BatteryEntity batteryEntity;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<InstructionEntity> instructions;
 
     @Embedded
