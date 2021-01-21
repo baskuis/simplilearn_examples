@@ -3,6 +3,7 @@ package robot;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Table(name = "robot")
@@ -27,10 +28,32 @@ public class RobotEntity implements Serializable {
     private Boolean isEvil;
 
     @ElementCollection
-    Map<String, String> parts = new HashMap<>();
+    private Map<String, String> parts = new HashMap<>();
+
+    @OneToOne
+    private BatteryEntity batteryEntity;
+
+    @OneToMany
+    private List<InstructionEntity> instructions;
 
     @Embedded
-    Description description;
+    private Description description;
+
+    public List<InstructionEntity> getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(List<InstructionEntity> instructions) {
+        this.instructions = instructions;
+    }
+
+    public BatteryEntity getBatteryEntity() {
+        return batteryEntity;
+    }
+
+    public void setBatteryEntity(BatteryEntity batteryEntity) {
+        this.batteryEntity = batteryEntity;
+    }
 
     public Description getDescription() {
         return description;

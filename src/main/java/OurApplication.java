@@ -23,6 +23,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import robot.BatteryEntity;
+import robot.InstructionEntity;
 import robot.RobotEntity;
 import videogames.HalfLife;
 import videogames.SuperMario;
@@ -43,6 +45,8 @@ import java.util.stream.Collectors;
 
 public class OurApplication {
 
+
+
     public static void main(String[] args) {
         try {
             hibernateSession = HibernateUtils
@@ -52,7 +56,11 @@ public class OurApplication {
 
             /* Insert some robots */
             for (int i = 0; i <= 10; i++) {
+                BatteryEntity battery = new BatteryEntity();
+                battery.setPercentagePower(90);
+                hibernateSession.save(battery);
                 RobotEntity robot = new RobotEntity();
+                robot.setBatteryEntity(battery);
                 robot.setName("awesome robot number:" + i);
                 robot.setSwitchedOn((i % 2 == 0));
                 robot.setEvil((i % 2 == 1));
@@ -63,7 +71,26 @@ public class OurApplication {
                 robot.getParts().put("motor", "electric");
                 robot.getParts().put("power", "nuclear");
                 robot.getParts().put("weapon", "hammer");
+                robot.getBatteryEntity().setPercentagePower(88);
+
                 hibernateSession.save(robot);
+
+                InstructionEntity findPuppy = new InstructionEntity();
+                findPuppy.setCommand("find puppy");
+                findPuppy.setRobot(robot);
+                hibernateSession.save(findPuppy);
+
+                InstructionEntity petPuppy = new InstructionEntity();
+                petPuppy.setCommand("pet puppy");
+                petPuppy.setRobot(robot);
+                hibernateSession.save(petPuppy);
+
+                List<InstructionEntity> instructions = new ArrayList<>();
+                instructions.add(findPuppy);
+                instructions.add(petPuppy);
+                robot.setInstructions(instructions);
+                hibernateSession.save(robot);
+
             }
 
             /* Insert some laptops */
@@ -81,25 +108,36 @@ public class OurApplication {
             List<RobotEntity> robots = hibernateSession.createQuery(criteria).getResultList();
 
             robots.forEach((r) ->  {
+                if (null == r.getBatteryEntity()){
+                    return;
+                }
+                if (null == r.getInstructions()) {
+                    return;
+                }
                 System.out.println(
                     "r: " + r.getId() +
                             " name:" + r.getName() +
                             " weight:" + r.getWeight() +
                             " on:" + r.getSwitchedOn() +
-                            " evil:" + r.getEvil()
+                            " evil:" + r.getEvil() +
+                            " battery left:" + r.getBatteryEntity().getPercentagePower()
                 );
                 System.out.println("motor:" + r.getParts().get("motor"));
                 System.out.println("power:" + r.getParts().get("power"));
                 System.out.println("weapon:" + r.getParts().get("weapon"));
+
+                System.out.println("Instructions:");
+                r.getInstructions().forEach(doStuff);
+
                 System.out.println("====================");
             });
 
             hibernateSession.getTransaction().commit();
         } catch(Exception sqlException) {
+            sqlException.printStackTrace();
             if (null != hibernateSession.getTransaction()) {
                 hibernateSession.getTransaction().rollback();
             }
-            sqlException.printStackTrace();
         } finally {
             if (hibernateSession != null) {
                 hibernateSession.close();
@@ -107,6 +145,11 @@ public class OurApplication {
         }
     }
 
+    static Consumer<InstructionEntity> doStuff = (instruction) -> {
+        System.out.println("Doing stuff");
+        System.out.println("Showing: " + instruction.getCommand());
+    };
+    
     static Session hibernateSession;
 
 

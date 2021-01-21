@@ -31,7 +31,8 @@ public class LaptopDetailsServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         out.println("<form action='' method='POST'>");
-        out.println("<label>Enter Product (Laptop) ID: <input type='text' name='laptop-id'></input></label>");
+        out.println("<label>Enter Product (Laptop) ID: " +
+                "<input type='text' name='laptop-id'></input></label>");
         out.println("<input type='submit'>Get Details</input>");
         out.println("</form>");
     }
