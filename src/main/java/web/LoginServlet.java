@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
                     "userid", userId
             );
 
-            resp.sendRedirect("laptop");
+            resp.sendRedirect("robot");
         }
         this.doGet(req, resp);
     }

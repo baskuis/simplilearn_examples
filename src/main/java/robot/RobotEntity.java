@@ -27,7 +27,7 @@ public class RobotEntity implements Serializable {
     @Column(name = "is_evil")
     private Boolean isEvil;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
     private Map<String, String> parts = new HashMap<>();
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -139,5 +139,13 @@ public class RobotEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String describeRobot() {
+        return String.format("name: %s, \n battery: %s \n first instruction: %s",
+                this.name,
+                this.batteryEntity.getPercentagePower(),
+                this.instructions.stream().findFirst().get().getCommand()
+        );
     }
 }
