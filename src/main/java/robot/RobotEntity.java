@@ -67,6 +67,8 @@ public class RobotEntity implements Serializable {
 
         @Column(name = "description_id")
         Long id;
+
+        @Column(name = "description_label")
         String label;
 
         public Description() { }
