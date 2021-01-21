@@ -29,6 +29,47 @@ public class RobotEntity implements Serializable {
     @ElementCollection
     Map<String, String> parts = new HashMap<>();
 
+    @Embedded
+    Description description;
+
+    public Description getDescription() {
+        return description;
+    }
+
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+
+    public static class Description {
+
+        @Column(name = "description_id")
+        Long id;
+        String label;
+
+        public Description() { }
+
+        public Description(Long id, String label) {
+            this.id = id;
+            this.label = label;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
+        }
+    }
+
     public Map<String, String> getParts() {
         return parts;
     }
